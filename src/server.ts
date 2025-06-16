@@ -192,7 +192,11 @@ class Server {
 
 // Start the server
 const server = new Server()
-server.start().catch((error) => {
+server.start()
+.then(()=>{
+  Logger.info("✅ Server started successfully")
+})
+.catch((error) => {
   Logger.error("💥 Fatal error starting server:", error)
   process.exit(1)
 })

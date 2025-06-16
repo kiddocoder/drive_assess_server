@@ -1,0 +1,30 @@
+/**
+ * Dashboard Routes
+ *
+ * Handles dashboard analytics and statistics:
+ * - Real-time dashboard data
+ * - Analytics and charts
+ * - Live activity feeds
+ * - System health monitoring
+ */
+
+import { Router } from "express"
+import { DashboardController } from "../controllers/DashboardController"
+import { authenticateToken } from "../middleware/auth"
+import { SocketService } from "../services/SocketService"
+
+const router = Router()
+
+// Initialize dashboard controller with socket service
+const socketService = new SocketService()
+const dashboardController = new DashboardController(socketService)
+
+// All routes require authentication
+router.use(authenticateToken)
+
+// Routes
+router.get("/stats", dashboardController.getDashboardStats)
+router.get("/analytics", dashboardController.getAnalytics)
+router.get("/live-activity", dashboardController.getLiveActivity)
+
+export default router

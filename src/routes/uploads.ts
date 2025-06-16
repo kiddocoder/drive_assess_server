@@ -1,54 +1,155 @@
 /**
- * User Routes
+ * Upload Routes
  *
- * Handles all user management endpoints:
- * - User CRUD operations
- * - User search and filtering
- * - Role management
- * - User statistics
- * - Bulk operations
+ * Handles file upload operations:
+ * - Image uploads for questions and profiles
+ * - Document uploads for certificates
+ * - Bulk question imports
+ * - File validation and processing
  */
 
 import { Router } from "express"
-import { body } from "express-validator"
-import { UserController } from "../controllers/UserController"
+import multer from "multer"
+import path from "path"
 import { authenticateToken, requireRole } from "../middleware/auth"
+import { Logger } from "../utils/Logger"
+import type { Express } from "express" // Import Express
 
 const router = Router()
-const userController = new UserController()
 
-// Validation rules
-const createUserValidation = [
-  body("name").trim().isLength({ min: 2, max: 100 }).withMessage("Name must be between 2 and 100 characters"),
-  body("email").isEmail().normalizeEmail().withMessage("Please provide a valid email"),
-  body("password")
-    .isLength({ min: 6 })
-    .withMessage("Password must be at least 6 characters")
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
-    .withMessage("Password must contain at least one lowercase letter, one uppercase letter, and one number"),
-  body("role").isIn(["admin", "instructor", "student"]).withMessage("Invalid role"),
-]
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/")
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9)
+    cb(null, file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname))
+  },
+})
 
-const updateUserValidation = [
-  body("name")
-    .optional()
-    .trim()
-    .isLength({ min: 2, max: 100 })
-    .withMessage("Name must be between 2 and 100 characters"),
-  body("email").optional().isEmail().normalizeEmail().withMessage("Please provide a valid email"),
-  body("role").optional().isIn(["admin", "instructor", "student"]).withMessage("Invalid role"),
-]
+const fileFilter = (req: any, file: any, cb: any) => {
+  // Allow images and documents
+  if (
+    file.mimetype.startsWith("image/") ||
+    file.mimetype === "application/pdf" ||
+    file.mimetype === "text/csv" ||
+    file.mimetype === "application/vnd.ms-excel"
+  ) {
+    cb(null, true)
+  } else {
+    cb(new Error("Invalid file type"), false)
+  }
+}
+
+const upload = multer({
+  storage,
+  fileFilter,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB limit
+  },
+})
 
 // All routes require authentication
 router.use(authenticateToken)
 
-// Routes
-router.get("/", requireRole(["admin"]), userController.getAllUsers)
-router.get("/stats", requireRole(["admin"]), userController.getUserStats)
-router.get("/:id", requireRole(["admin", "instructor"]), userController.getUserById)
-router.post("/", requireRole(["admin"]), createUserValidation, userController.createUser)
-router.put("/:id", requireRole(["admin"]), updateUserValidation, userController.updateUser)
-router.delete("/:id", requireRole(["admin"]), userController.deleteUser)
-router.patch("/:id/toggle-status", requireRole(["admin"]), userController.toggleUserStatus)
+// Upload single image
+router.post("/image", upload.single("image"), (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "No file uploaded",
+      })
+    }
+
+    Logger.info(`Image uploaded: ${req.file.filename}`)
+
+    res.status(200).json({
+      success: true,
+      message: "Image uploaded successfully",
+      data: {
+        filename: req.file.filename,
+        originalName: req.file.originalname,
+        size: req.file.size,
+        url: `/uploads/${req.file.filename}`,
+      },
+    })
+  } catch (error: any) {
+    Logger.error("Image upload error:", error)
+    res.status(500).json({
+      success: false,
+      message: "Failed to upload image",
+    })
+  }
+})
+
+// Upload multiple images
+router.post("/images", upload.array("images", 5), (req, res) => {
+  try {
+    const files = req.files as Express.Multer.File[]
+
+    if (!files || files.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "No files uploaded",
+      })
+    }
+
+    const uploadedFiles = files.map((file) => ({
+      filename: file.filename,
+      originalName: file.originalname,
+      size: file.size,
+      url: `/uploads/${file.filename}`,
+    }))
+
+    Logger.info(`Multiple images uploaded: ${files.length} files`)
+
+    res.status(200).json({
+      success: true,
+      message: "Images uploaded successfully",
+      data: { files: uploadedFiles },
+    })
+  } catch (error: any) {
+    Logger.error("Multiple image upload error:", error)
+    res.status(500).json({
+      success: false,
+      message: "Failed to upload images",
+    })
+  }
+})
+
+// Upload CSV for bulk question import
+router.post("/questions-csv", requireRole(["admin", "instructor"]), upload.single("csv"), (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "No CSV file uploaded",
+      })
+    }
+
+    // TODO: Process CSV file and create questions
+    // This would involve parsing the CSV and creating Question documents
+
+    Logger.info(`Questions CSV uploaded: ${req.file.filename}`)
+
+    res.status(200).json({
+      success: true,
+      message: "CSV file uploaded successfully. Questions will be processed.",
+      data: {
+        filename: req.file.filename,
+        originalName: req.file.originalname,
+        size: req.file.size,
+      },
+    })
+  } catch (error: any) {
+    Logger.error("CSV upload error:", error)
+    res.status(500).json({
+      success: false,
+      message: "Failed to upload CSV file",
+    })
+  }
+})
 
 export default router
