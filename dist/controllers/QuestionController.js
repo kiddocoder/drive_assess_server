@@ -244,4 +244,3 @@ class QuestionController {
 }
 exports.QuestionController = QuestionController;
 exports.default = new QuestionController();
-//# sourceMappingURL=QuestionController.js.map

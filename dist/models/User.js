@@ -238,4 +238,3 @@ userSchema.virtual("isAccountLocked").get(function () {
     return this.isLocked();
 });
 exports.User = mongoose_1.default.model("User", userSchema);
-//# sourceMappingURL=User.js.map

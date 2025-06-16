@@ -42,4 +42,3 @@ router.patch("/:id/publish", (0, auth_1.requireRole)(["admin", "instructor"]), t
 router.post("/:testId/questions/:questionId", (0, auth_1.requireRole)(["admin", "instructor"]), testController.addQuestionToTest);
 router.delete("/:testId/questions/:questionId", (0, auth_1.requireRole)(["admin", "instructor"]), testController.removeQuestionFromTest);
 exports.default = router;
-//# sourceMappingURL=tests.js.map

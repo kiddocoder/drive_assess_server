@@ -135,4 +135,3 @@ server.start()
     Logger_1.Logger.error("💥 Fatal error starting server:", error);
     process.exit(1);
 });
-//# sourceMappingURL=server.js.map

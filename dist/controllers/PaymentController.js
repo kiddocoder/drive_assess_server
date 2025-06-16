@@ -294,4 +294,3 @@ class PaymentController {
 }
 exports.PaymentController = PaymentController;
 exports.default = new PaymentController();
-//# sourceMappingURL=PaymentController.js.map

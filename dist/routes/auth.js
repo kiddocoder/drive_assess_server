@@ -37,4 +37,3 @@ router.post("/reset-password/:token", resetPasswordValidation, authController.re
 router.get("/profile", auth_1.authenticateToken, authController.getProfile);
 router.put("/profile", auth_1.authenticateToken, authController.updateProfile);
 exports.default = router;
-//# sourceMappingURL=auth.js.map

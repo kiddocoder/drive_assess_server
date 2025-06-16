@@ -162,4 +162,3 @@ questionSchema.index({ createdBy: 1 });
 questionSchema.index({ tags: 1 });
 questionSchema.index({ isActive: 1 });
 exports.Question = mongoose_1.default.model("Question", questionSchema);
-//# sourceMappingURL=Question.js.map

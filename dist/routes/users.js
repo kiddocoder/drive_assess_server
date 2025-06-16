@@ -34,4 +34,3 @@ router.put("/:id", (0, auth_1.requireRole)(["admin"]), updateUserValidation, use
 router.delete("/:id", (0, auth_1.requireRole)(["admin"]), userController.deleteUser);
 router.patch("/:id/toggle-status", (0, auth_1.requireRole)(["admin"]), userController.toggleUserStatus);
 exports.default = router;
-//# sourceMappingURL=users.js.map

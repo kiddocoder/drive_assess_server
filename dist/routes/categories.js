@@ -39,4 +39,3 @@ router.post("/", (0, auth_1.requireRole)(["admin", "instructor"]), createCategor
 router.put("/:id", (0, auth_1.requireRole)(["admin", "instructor"]), updateCategoryValidation, categoryController.updateCategory);
 router.delete("/:id", (0, auth_1.requireRole)(["admin"]), categoryController.deleteCategory);
 exports.default = router;
-//# sourceMappingURL=categories.js.map

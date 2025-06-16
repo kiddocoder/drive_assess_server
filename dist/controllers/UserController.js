@@ -240,4 +240,3 @@ class UserController {
 }
 exports.UserController = UserController;
 exports.default = new UserController();
-//# sourceMappingURL=UserController.js.map

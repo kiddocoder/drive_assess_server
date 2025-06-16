@@ -26,4 +26,3 @@ router.use("/tests", tests_1.default);
 router.use("/payments", payments_1.default);
 router.use("/upload", upload_1.default);
 exports.default = router;
-//# sourceMappingURL=index.js.map

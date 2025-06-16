@@ -123,4 +123,3 @@ router.post("/questions-csv", (0, auth_1.requireRole)(["admin", "instructor"]), 
     }
 });
 exports.default = router;
-//# sourceMappingURL=uploads.js.map

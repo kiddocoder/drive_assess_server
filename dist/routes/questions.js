@@ -41,4 +41,3 @@ router.post("/bulk", (0, auth_1.requireRole)(["admin", "instructor"]), questionC
 router.put("/:id", (0, auth_1.requireRole)(["admin", "instructor"]), updateQuestionValidation, questionController.updateQuestion);
 router.delete("/:id", (0, auth_1.requireRole)(["admin", "instructor"]), questionController.deleteQuestion);
 exports.default = router;
-//# sourceMappingURL=questions.js.map

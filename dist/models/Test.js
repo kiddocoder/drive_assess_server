@@ -154,4 +154,3 @@ testSchema.virtual("questionCount").get(function () {
     return this.questions.length;
 });
 exports.Test = mongoose_1.default.model("Test", testSchema);
-//# sourceMappingURL=Test.js.map

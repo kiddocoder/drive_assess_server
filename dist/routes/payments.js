@@ -20,4 +20,3 @@ router.post("/", createPaymentValidation, paymentController.createPayment);
 router.patch("/:id/status", (0, auth_1.requireRole)(["admin"]), paymentController.updatePaymentStatus);
 router.post("/:id/refund", (0, auth_1.requireRole)(["admin"]), paymentController.processRefund);
 exports.default = router;
-//# sourceMappingURL=payments.js.map

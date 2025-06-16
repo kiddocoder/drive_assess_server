@@ -370,6 +370,8 @@ export class AuthController {
   }
 
   private generateToken(userId: string, role: string, expiresIn = "7d"): string {
-    return jwt.sign({ userId, role }, process.env.JWT_SECRET!, { expiresIn })
+    return jwt.sign({ userId, role }, process.env.JWT_SECRET || "Here", { expiresIn })
   }
 }
+
+export default new AuthController()

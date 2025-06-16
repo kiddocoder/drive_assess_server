@@ -95,4 +95,3 @@ const requireOwnership = async (req, res, next) => {
     }
 };
 exports.requireOwnership = requireOwnership;
-//# sourceMappingURL=auth.js.map

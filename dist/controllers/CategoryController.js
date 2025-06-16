@@ -219,4 +219,3 @@ class CategoryController {
     }
 }
 exports.CategoryController = CategoryController;
-//# sourceMappingURL=CategoryController.js.map

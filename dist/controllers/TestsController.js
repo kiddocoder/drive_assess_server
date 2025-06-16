@@ -290,4 +290,3 @@ class TestController {
 }
 exports.TestController = TestController;
 exports.default = new TestsController();
-//# sourceMappingURL=TestsController.js.map

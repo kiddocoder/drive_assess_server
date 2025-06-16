@@ -164,4 +164,3 @@ resultSchema.index({ completedAt: -1 });
 resultSchema.index({ percentage: -1 });
 resultSchema.index({ student: 1, test: 1, attempt: 1 }, { unique: true });
 exports.Result = mongoose_1.default.model("Result", resultSchema);
-//# sourceMappingURL=Result.js.map

@@ -48,4 +48,3 @@ const notFound = (req, res, next) => {
 };
 exports.notFound = notFound;
 exports.default = exports.errorHandler;
-//# sourceMappingURL=ErrorHandler.js.map

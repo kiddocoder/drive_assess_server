@@ -12,4 +12,3 @@ router.get("/stats", dashboardController.getDashboardStats);
 router.get("/analytics", dashboardController.getAnalytics);
 router.get("/live-activity", dashboardController.getLiveActivity);
 exports.default = router;
-//# sourceMappingURL=dashboard.js.map

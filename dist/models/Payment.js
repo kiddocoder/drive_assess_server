@@ -138,4 +138,3 @@ paymentSchema.index({ type: 1 });
 paymentSchema.index({ transactionId: 1 });
 paymentSchema.index({ createdAt: -1 });
 exports.Payment = mongoose_1.default.model("Payment", paymentSchema);
-//# sourceMappingURL=Payment.js.map

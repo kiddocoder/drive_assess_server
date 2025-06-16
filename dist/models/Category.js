@@ -108,4 +108,3 @@ categorySchema.index({ parent: 1 });
 categorySchema.index({ isActive: 1 });
 categorySchema.index({ sortOrder: 1 });
 exports.Category = mongoose_1.default.model("Category", categorySchema);
-//# sourceMappingURL=Category.js.map

@@ -11,12 +11,10 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "sourceMap": true,
     "declaration": false,
-    "removeComments": true,
+    "removeComments": false,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -28,21 +26,6 @@
     "noUncheckedIndexedAccess": false,
     "allowUnusedLabels": false,
     "allowUnreachableCode": false,
-    "baseUrl": "./src",
-    "paths": {
-      "@/*": ["./*"],
-      "@/models/*": ["src/models/*"],
-      "@/controllers/*": ["./controllers/*"],
-      "@/services/*": ["src/services/*"],
-      "@/middleware/*": ["src/middleware/*"],
-      "@/utils/*": ["src/utils/*"],
-      "@/routes/*": ["src/routes/*"]
-    }
-  },
-  "include": ["src","src/**/*,**/*.ts"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"],
-  "ts-node": {
-    "esm": true,
-    "experimentalSpecifierResolution": "node"
+    "baseUrl": "./src"
   }
 }

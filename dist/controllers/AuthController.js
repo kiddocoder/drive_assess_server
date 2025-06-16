@@ -296,4 +296,4 @@ class AuthController {
     }
 }
 exports.AuthController = AuthController;
-//# sourceMappingURL=AuthController.js.map
+exports.default = new AuthController();
