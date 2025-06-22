@@ -15,6 +15,7 @@ import { Test } from "../models/Test"
 import { Question } from "../models/Question"
 import { Result } from "../models/Result"
 import { Logger } from "../utils/Logger"
+import { Types } from "mongoose"
 
 export class TestController {
   public getAllTests = async (req: Request, res: Response): Promise<void> => {
@@ -288,7 +289,7 @@ export class TestController {
         return
       }
 
-      if (test.questions.includes(question._id)) {
+      if (test.questions.includes(question._id as Types.ObjectId)) {
         res.status(400).json({
           success: false,
           message: "Question already added to test",
@@ -296,7 +297,7 @@ export class TestController {
         return
       }
 
-      test.questions.push(question._id)
+      test.questions.push(question._id as Types.ObjectId)
       await test.save()
 
       res.status(200).json({
@@ -344,4 +345,4 @@ export class TestController {
   }
 }
 
-export default new TestsController()
+export default new TestController()

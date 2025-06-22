@@ -14,6 +14,7 @@ import { validationResult } from "express-validator"
 import { Payment } from "../models/Payment"
 import { User } from "../models/User"
 import { Logger } from "../utils/Logger"
+import { Types } from "mongoose"
 
 export class PaymentController {
   public getAllPayments = async (req: Request, res: Response): Promise<void> => {
@@ -308,7 +309,7 @@ export class PaymentController {
     }
   }
 
-  private async cancelUserSubscription(userId: string, reason: string): Promise<void> {
+  private async cancelUserSubscription(userId: Types.ObjectId, reason: string): Promise<void> {
     try {
       const user = await User.findById(userId)
       if (!user || !user.subscription) return

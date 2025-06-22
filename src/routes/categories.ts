@@ -10,8 +10,8 @@
 
 import { Router } from "express"
 import { body } from "express-validator"
-import { CategoryController } from "../controllers/CategoryController"
-import { authenticateToken, requireRole } from "../middleware/auth"
+import { CategoryController } from "../controllers/category.controller"
+import { authenticateToken, requireRole } from "../middleware/auth.middleware"
 
 const router = Router()
 const categoryController = new CategoryController()

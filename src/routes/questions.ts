@@ -10,8 +10,8 @@
 
 import { Router } from "express"
 import { body } from "express-validator"
-import { QuestionController } from "../controllers/QuestionController"
-import { authenticateToken, requireRole } from "../middleware/auth"
+import { QuestionController } from "../controllers/question.controller"
+import { authenticateToken, requireRole } from "../middleware/auth.middleware"
 
 const router = Router()
 const questionController = new QuestionController()

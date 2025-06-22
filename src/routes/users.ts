@@ -11,8 +11,8 @@
 
 import { Router } from "express"
 import { body } from "express-validator"
-import { UserController } from "../controllers/UserController"
-import { authenticateToken, requireRole } from "../middleware/auth"
+import { UserController } from "../controllers/user.controller"
+import { authenticateToken, requireRole } from "../middleware/auth.middleware"
 
 const router = Router()
 const userController = new UserController()

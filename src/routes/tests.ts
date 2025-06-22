@@ -11,11 +11,11 @@
 
 import { Router } from "express"
 import { body } from "express-validator"
-import { TestController } from "../controllers/TestController"
-import { authenticateToken, requireRole } from "../middleware/auth"
+import controllers from "../controllers/controllers"
+import { authenticateToken, requireRole } from "../middleware/auth.middleware"
 
 const router = Router()
-const testController = new TestController()
+const testController = new controllers.TestController()
 
 // Validation rules
 const createTestValidation = [

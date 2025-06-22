@@ -22,7 +22,7 @@ export class DatabaseService {
   private isConnected = false
 
   constructor() {
-    this.connectionString = process.env.MONGODB_URI || "mongodb://localhost:27017/driveready"
+    this.connectionString = process.env.MONGODB_URI || "mongodb+srv://novadiscova:Nova123@cluster0.dhz0o.mongodb.net/drive"
     this.setupEventListeners()
   }
 
@@ -32,7 +32,6 @@ export class DatabaseService {
         maxPoolSize: 10, // Maintain up to 10 socket connections
         serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
         socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-        bufferMaxEntries: 0, // Disable mongoose buffering
         bufferCommands: false, // Disable mongoose buffering
       }
 

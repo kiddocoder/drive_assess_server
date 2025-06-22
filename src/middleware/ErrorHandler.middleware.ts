@@ -8,7 +8,7 @@
  * - Handles different error types
  */
 
-import type { Request, Response, NextFunction } from "express"
+import  { Request, Response, NextFunction } from "express"
 import { Logger } from "../utils/Logger"
 
 interface CustomError extends Error {

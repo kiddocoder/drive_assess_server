@@ -10,8 +10,8 @@
 
 import { Router } from "express"
 import { body } from "express-validator"
-import { PaymentController } from "../controllers/PaymentController"
-import { authenticateToken, requireRole } from "../middleware/auth"
+import { PaymentController } from "../controllers/payment.controller"
+import { authenticateToken, requireRole } from "../middleware/auth.middleware"
 
 const router = Router()
 const paymentController = new PaymentController()

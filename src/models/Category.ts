@@ -102,7 +102,6 @@ const categorySchema = new Schema<ICategory>(
 )
 
 // Indexes for performance
-categorySchema.index({ slug: 1 })
 categorySchema.index({ parent: 1 })
 categorySchema.index({ isActive: 1 })
 categorySchema.index({ sortOrder: 1 })

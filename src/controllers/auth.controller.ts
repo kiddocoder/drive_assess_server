@@ -15,12 +15,12 @@
  * - Rate limiting protection
  */
 
-import type { Request, Response } from "express"
+import  { Request, Response } from "express"
 import jwt from "jsonwebtoken"
 import { validationResult } from "express-validator"
 import { User } from "../models/User"
 import { EmailService } from "../services/EmailService"
-import { Logger } from "../src/utils/Logger"
+import { Logger } from "../utils/Logger"
 
 export class AuthController {
   private emailService: EmailService
@@ -34,12 +34,12 @@ export class AuthController {
       // Check validation errors
       const errors = validationResult(req)
       if (!errors.isEmpty()) {
-        res.status(400).json({
+         res.status(400).json({
           success: false,
           message: "Validation failed",
           errors: errors.array(),
         })
-        return
+        return;
       }
 
       const { name, email, password, role = "student", phone, location } = req.body
@@ -67,7 +67,7 @@ export class AuthController {
       await user.save()
 
       // Generate JWT token
-      const token = this.generateToken(user._id.toString(), user.role)
+      const token = user.generateToken()
 
       // Send verification email
       await this.emailService.sendVerificationEmail(user.email, user.name, token)
@@ -161,7 +161,7 @@ export class AuthController {
       await user.save()
 
       // Generate JWT token
-      const token = this.generateToken(user._id.toString(), user.role)
+      const token = user.generateToken()
 
       Logger.info(`User logged in: ${email} (${user.role})`)
 
@@ -248,7 +248,7 @@ export class AuthController {
       }
 
       // Generate reset token
-      const resetToken = this.generateToken(user._id.toString(), user.role, "1h")
+      const resetToken = user.generateToken()
 
       // Send reset email
       await this.emailService.sendPasswordResetEmail(user.email, user.name, resetToken)
@@ -367,10 +367,6 @@ export class AuthController {
         message: "Internal server error",
       })
     }
-  }
-
-  private generateToken(userId: string, role: string, expiresIn = "7d"): string {
-    return jwt.sign({ userId, role }, process.env.JWT_SECRET || "Here", { expiresIn })
   }
 }
 

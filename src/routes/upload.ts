@@ -11,11 +11,12 @@
 import { Router } from "express"
 import multer from "multer"
 import path from "path"
-import { authenticateToken, requireRole } from "../middleware/auth"
+import { authenticateToken, requireRole } from "../middleware/auth.middleware"
 import { Logger } from "../utils/Logger"
-import type { Express } from "express" // Import Express
+import type {NextFunction, Request, Response} from "express"
+import { asyncWrapper } from "../helpers/async-wrapper"
 
-const router = Router()
+const router:Router = Router() as Router;
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -54,7 +55,7 @@ const upload = multer({
 router.use(authenticateToken)
 
 // Upload single image
-router.post("/image", upload.single("image"), (req, res) => {
+router.post("/image", upload.single("image"), asyncWrapper((req:Request, res:Response) => {
   try {
     if (!req.file) {
       return res.status(400).json({
@@ -82,10 +83,10 @@ router.post("/image", upload.single("image"), (req, res) => {
       message: "Failed to upload image",
     })
   }
-})
+}))
 
 // Upload multiple images
-router.post("/images", upload.array("images", 5), (req, res) => {
+router.post("/images", upload.array("images", 5), asyncWrapper((req:Request, res:Response) => {
   try {
     const files = req.files as Express.Multer.File[]
 
@@ -117,10 +118,10 @@ router.post("/images", upload.array("images", 5), (req, res) => {
       message: "Failed to upload images",
     })
   }
-})
+}))
 
 // Upload CSV for bulk question import
-router.post("/questions-csv", requireRole(["admin", "instructor"]), upload.single("csv"), (req, res) => {
+router.post("/questions-csv", requireRole(["admin", "instructor"]), upload.single("csv"), asyncWrapper((req:Request, res:Response,next:NextFunction) => {
   try {
     if (!req.file) {
       return res.status(400).json({
@@ -150,6 +151,6 @@ router.post("/questions-csv", requireRole(["admin", "instructor"]), upload.singl
       message: "Failed to upload CSV file",
     })
   }
-})
+}))
 
 export default router

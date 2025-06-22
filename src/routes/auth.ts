@@ -16,8 +16,8 @@
 
 import { Router } from "express"
 import { body } from "express-validator"
-import { AuthController } from "../controllers/AuthController"
-import { authenticateToken } from "../middleware/auth"
+import { AuthController } from "../controllers/auth.controller"
+import { authenticateToken } from "../middleware/auth.middleware"
 
 const router = Router()
 const authController = new AuthController()

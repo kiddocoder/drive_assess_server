@@ -16,6 +16,7 @@
 
 import mongoose, { type Document, Schema } from "mongoose"
 import bcrypt from "bcryptjs"
+import jwt,{JwtPayload} from "jsonwebtoken"
 
 export interface IUser extends Document {
   name: string
@@ -57,6 +58,7 @@ export interface IUser extends Document {
   createdAt: Date
   updatedAt: Date
   comparePassword(candidatePassword: string): Promise<boolean>
+  generateToken():string
   incrementLoginAttempts(): Promise<void>
   resetLoginAttempts(): Promise<void>
   isLocked(): boolean
@@ -210,6 +212,7 @@ const userSchema = new Schema<IUser>(
   },
   {
     timestamps: true,
+    collection:"user",
     toJSON: {
       transform: (doc, ret) => {
         delete ret.password
@@ -222,7 +225,6 @@ const userSchema = new Schema<IUser>(
 )
 
 // Indexes for performance
-userSchema.index({ email: 1 })
 userSchema.index({ role: 1 })
 userSchema.index({ isActive: 1 })
 userSchema.index({ "subscription.type": 1 })
@@ -281,5 +283,16 @@ userSchema.methods.isLocked = function (): boolean {
 userSchema.virtual("isAccountLocked").get(function () {
   return this.isLocked()
 })
+
+userSchema.methods.generateToken = function():string{
+  const payload:JwtPayload = ():Object => {
+    return this
+  } ;
+
+  return jwt.sign(payload,process.env.JWT_SECRET || "Here",{
+   expiresIn:"1d",
+  })
+
+}
 
 export const User = mongoose.model<IUser>("User", userSchema)

@@ -9,8 +9,8 @@
  */
 
 import { Router } from "express"
-import { DashboardController } from "../controllers/DashboardController"
-import { authenticateToken } from "../middleware/auth"
+import { DashboardController } from "../controllers/dashboard.controller"
+import { authenticateToken } from "../middleware/auth.middleware"
 import { SocketService } from "../services/SocketService"
 
 const router = Router()

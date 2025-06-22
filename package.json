@@ -1,11 +1,12 @@
 {
+  "$schema":"https://json.schemastore.org/package",
   "name": "drive_assess_server",
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",
   "scripts": {
     "start": "node dist/server.js",
-    "dev": "ts-node src/server.ts",
+    "dev": "nodemon src/server.ts",
     "build": "tsc",
     "test": "jest",
     "lint": "eslint src/**/*.ts",

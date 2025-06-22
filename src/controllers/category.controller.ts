@@ -14,6 +14,7 @@ import { Category } from "../models/Category"
 import { Test } from "../models/Test"
 import { Question } from "../models/Question"
 import { Logger } from "../utils/Logger"
+import mongoose from "mongoose"
 
 export class CategoryController {
   public getAllCategories = async (req: Request, res: Response): Promise<void> => {
@@ -229,7 +230,8 @@ export class CategoryController {
 
       // First pass: create map of all categories
       categories.forEach((cat) => {
-        categoryMap.set(cat._id.toString(), {
+        const catId = (cat._id as mongoose.Types.ObjectId | string).toString()
+        categoryMap.set(catId, {
           ...cat.toObject(),
           children: [],
         })
@@ -237,7 +239,8 @@ export class CategoryController {
 
       // Second pass: build tree structure
       categories.forEach((cat) => {
-        const categoryObj = categoryMap.get(cat._id.toString())
+         const catId = (cat._id as mongoose.Types.ObjectId | string).toString()
+        const categoryObj = categoryMap.get(catId)
         if (cat.parent) {
           const parent = categoryMap.get(cat.parent.toString())
           if (parent) {
