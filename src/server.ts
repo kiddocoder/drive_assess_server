@@ -46,7 +46,7 @@ class Server {
 
     // Initialize services
     this.databaseService = new DatabaseService()
-    this.socketService = new SocketService()
+    this.socketService = new SocketService(this.httpServer)
 
     this.initializeMiddleware()
     this.initializeRoutes()

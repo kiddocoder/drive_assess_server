@@ -10,7 +10,7 @@
 
 import type { Request, Response, NextFunction } from "express"
 import jwt from "jsonwebtoken"
-import { User } from "../models/User"
+import { User } from "../models/users/User"
 import { Logger } from "../utils/Logger"
 
 interface AuthRequest extends Request {

@@ -11,10 +11,11 @@
 
 import type { Request, Response } from "express"
 import { validationResult } from "express-validator"
-import { Payment } from "../models/Payment"
-import { User } from "../models/User"
+import { IPayment, Payment } from "../models/payments/Payment"
+import { User } from "../models/users/User"
 import { Logger } from "../utils/Logger"
 import { Types } from "mongoose"
+import { Subscription } from "../models/users/Subscription"
 
 export class PaymentController {
   public getAllPayments = async (req: Request, res: Response): Promise<void> => {
@@ -219,7 +220,7 @@ export class PaymentController {
 
       // Update user subscription if needed
       if (originalPayment.type === "subscription") {
-        await this.cancelUserSubscription(originalPayment.user, reason)
+        await this.cancelUserSubscription(originalPayment.user, originalPayment.subscription, reason)
       }
 
       Logger.info(`Refund processed: ${refundPayment._id} for payment ${originalPayment._id}`)
@@ -286,7 +287,7 @@ export class PaymentController {
     }
   }
 
-  private async updateUserSubscription(payment: any): Promise<void> {
+  private async updateUserSubscription(subscriptionId: Types.ObjectId, userId: Types.ObjectId, payment: IPayment): Promise<void> {
     try {
       const user = await User.findById(payment.user)
       if (!user) return
@@ -295,27 +296,43 @@ export class PaymentController {
       const startDate = new Date()
       const endDate = new Date(startDate.getTime() + subscriptionDays * 24 * 60 * 60 * 1000)
 
-      user.subscription = {
-        type: payment.plan,
-        startDate,
-        endDate,
-        isActive: true,
+      // find subscriptions for that user 
+      const subscription = await Subscription.findOne(subscriptionId)
+
+      if (subscription) {
+        subscription.type = payment.plan  
+        subscription.startDate = startDate
+        subscription.endDate = endDate
+        subscription.isActive = true
+        await subscription.save()
+      } else {
+        await Subscription.create({
+          user: userId,
+          type: payment.plan,
+          startDate,
+          endDate,
+          isActive: true,
+        })
       }
 
-      await user.save()
       Logger.info(`User subscription updated: ${user.email} - ${payment.plan}`)
     } catch (error: any) {
       Logger.error("Update user subscription error:", error)
     }
   }
 
-  private async cancelUserSubscription(userId: Types.ObjectId, reason: string): Promise<void> {
+  private async cancelUserSubscription(userId: Types.ObjectId, subcriptionId: Types.ObjectId, reason: string): Promise<void> {
     try {
-      const user = await User.findById(userId)
-      if (!user || !user.subscription) return
+      const subscription = await Subscription.findOne({ _id: subcriptionId, isActive: true ,user: userId })
 
-      user.subscription.isActive = false
-      await user.save()
+      const user = await User.findById(userId)
+
+      if (!user) return
+  
+      if (!subscription) return
+
+      subscription.isActive = false
+      await subscription.save()
 
       Logger.info(`User subscription cancelled: ${user.email} - ${reason}`)
     } catch (error: any) {

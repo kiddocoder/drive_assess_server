@@ -18,7 +18,7 @@
 import  { Request, Response } from "express"
 import jwt from "jsonwebtoken"
 import { validationResult } from "express-validator"
-import { User } from "../models/User"
+import { User } from "../models/users/User"
 import { EmailService } from "../services/EmailService"
 import { Logger } from "../utils/Logger"
 
@@ -114,6 +114,9 @@ export class AuthController {
 
       // Find user and include password for comparison
       const user = await User.findOne({ email }).select("+password")
+      .populate("subscriptions")
+      .populate("role");
+
       if (!user) {
         res.status(401).json({
           success: false,
@@ -176,7 +179,7 @@ export class AuthController {
             role: user.role,
             isEmailVerified: user.isEmailVerified,
             lastLogin: user.lastLogin,
-            subscription: user.subscription,
+            subscription: user.subscriptions,
           },
           token,
         },

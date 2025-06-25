@@ -16,7 +16,7 @@
  */
 
 import type { Request, Response } from "express"
-import { User } from "../models/User"
+import { User } from "../models/users/User"
 import { Test } from "../models/Test"
 import { Logger } from "../utils/Logger"
 import type { SocketService } from "../services/SocketService"

@@ -22,7 +22,7 @@ export interface IUser extends Document {
   name: string
   email: string
   password: string
-  role: "admin" | "instructor" | "student"
+  role: mongoose.Types.ObjectId
   phone?: string
   location?: string
   avatar?: string
@@ -31,12 +31,7 @@ export interface IUser extends Document {
   lastLogin?: Date
   loginAttempts: number
   lockUntil?: Date
-  subscription?: {
-    type: "free" | "3-day" | "4-day" | "premium"
-    startDate: Date
-    endDate?: Date
-    isActive: boolean
-  }
+  subscriptions: mongoose.Types.ObjectId[]
   profile?: {
     bio?: string
     specialization?: string[]
@@ -87,10 +82,9 @@ const userSchema = new Schema<IUser>(
       select: false, // Don't include password in queries by default
     },
     role: {
-      type: String,
-      enum: ["admin", "instructor", "student"],
-      default: "student",
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "Role",
+      required: [true, "Role is required"],
     },
     phone: {
       type: String,
@@ -126,89 +120,25 @@ const userSchema = new Schema<IUser>(
       type: Date,
       default: null,
     },
-    subscription: {
-      type: {
-        type: String,
-        enum: ["free", "3-day", "4-day", "premium"],
-        default: "free",
-      },
-      startDate: {
-        type: Date,
-        default: Date.now,
-      },
-      endDate: {
-        type: Date,
+    subscriptions: [
+      {
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"Subscription",
+      default: null
+    }
+  ],
+    profile: {
+      type: Schema.Types.ObjectId,
+      ref: "Profile",
+      default: null,  
+    },
+    preferences: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Preference",
         default: null,
       },
-      isActive: {
-        type: Boolean,
-        default: true,
-      },
-    },
-    profile: {
-      bio: {
-        type: String,
-        maxlength: [500, "Bio cannot exceed 500 characters"],
-      },
-      specialization: [
-        {
-          type: String,
-          trim: true,
-        },
-      ],
-      experience: {
-        type: Number,
-        min: [0, "Experience cannot be negative"],
-        max: [50, "Experience cannot exceed 50 years"],
-      },
-      certifications: [
-        {
-          type: String,
-          trim: true,
-        },
-      ],
-      rating: {
-        type: Number,
-        min: [0, "Rating cannot be less than 0"],
-        max: [5, "Rating cannot exceed 5"],
-        default: 0,
-      },
-      studentsCount: {
-        type: Number,
-        default: 0,
-        min: [0, "Students count cannot be negative"],
-      },
-      testsCreated: {
-        type: Number,
-        default: 0,
-        min: [0, "Tests created cannot be negative"],
-      },
-    },
-    preferences: {
-      language: {
-        type: String,
-        default: "en",
-        enum: ["en", "fr", "es", "ar"],
-      },
-      timezone: {
-        type: String,
-        default: "America/Toronto",
-      },
-      notifications: {
-        email: {
-          type: Boolean,
-          default: true,
-        },
-        push: {
-          type: Boolean,
-          default: true,
-        },
-        sms: {
-          type: Boolean,
-          default: false,
-        },
-      },
-    },
+    ]
   },
   {
     timestamps: true,

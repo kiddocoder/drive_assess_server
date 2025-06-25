@@ -11,9 +11,9 @@
 
 import type { Request, Response } from "express"
 import { validationResult } from "express-validator"
-import { User } from "../models/User"
+import { User } from "../models/users/User"
 import { Result } from "../models/Result"
-import { Payment } from "../models/Payment"
+import { Payment } from "../models/payments/Payment"
 import { Logger } from "../utils/Logger"
 
 export class UserController {

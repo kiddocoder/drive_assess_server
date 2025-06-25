@@ -31,8 +31,9 @@ export class SocketService {
   private connectedUsers: Map<string, string> = new Map() // userId -> socketId
   public httpServer = {}
 
-  constructor() {
-    this.httpServer = 
+  constructor(httpServer:any) {
+
+    this.httpServer = httpServer;
     this.io = new SocketIOServer(this.httpServer, {
       cors: {
         origin: [process.env.FRONTEND_URL || "http://localhost:5173"],

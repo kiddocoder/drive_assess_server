@@ -1,53 +1,161 @@
-{"level":"warn","message":"⚠️ Mongoose disconnected from MongoDB","service":"driveready-api","timestamp":"2025-06-21 15:45:07"}
-{"level":"warn","message":"⚠️ Mongoose disconnected from MongoDB","service":"driveready-api","timestamp":"2025-06-21 23:54:43"}
-{"level":"warn","message":"⚠️ Mongoose disconnected from MongoDB","service":"driveready-api","timestamp":"2025-06-21 23:56:12"}
-{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-22 00:00:34"}
-{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-22 00:08:30"}
-{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-22 00:08:30"}
-{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-22 00:08:30"}
-{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-22 00:08:30"}
-{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-22 00:08:30"}
-{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-22 00:08:30"}
-{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-22 00:08:30"}
-{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-22 00:08:30"}
-{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-22 00:08:30"}
-{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-22 00:08:30"}
-{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-22 00:08:30"}
-{"level":"info","message":"📴 Received SIGINT. Starting graceful shutdown...","service":"driveready-api","timestamp":"2025-06-22 00:25:07"}
-{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-22 00:25:58"}
-{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-22 00:25:58"}
-{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-22 00:25:58"}
-{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-22 00:25:58"}
-{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-22 00:25:58"}
-{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-22 00:25:58"}
-{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-22 00:25:58"}
-{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-22 00:25:58"}
-{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-22 00:25:58"}
-{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-22 00:25:58"}
-{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-22 00:25:58"}
-{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-22 00:33:37"}
-{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-22 00:33:37"}
-{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-22 00:33:37"}
-{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-22 00:33:37"}
-{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-22 00:33:37"}
-{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-22 00:33:37"}
-{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-22 00:33:37"}
-{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-22 00:33:37"}
-{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-22 00:33:37"}
-{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-22 00:33:37"}
-{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-22 00:33:37"}
-{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-22 00:36:24"}
-{"level":"warn","message":"⚠️ Mongoose disconnected from MongoDB","service":"driveready-api","timestamp":"2025-06-22 00:42:10"}
-{"level":"warn","message":"⚠️ Mongoose disconnected from MongoDB","service":"driveready-api","timestamp":"2025-06-22 00:43:05"}
-{"level":"warn","message":"⚠️ Mongoose disconnected from MongoDB","service":"driveready-api","timestamp":"2025-06-22 00:43:31"}
-{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-22 06:53:52"}
-{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-22 06:53:52"}
-{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-22 06:53:52"}
-{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-22 06:53:52"}
-{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-22 06:53:52"}
-{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-22 06:53:52"}
-{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-22 06:53:52"}
-{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-22 06:53:52"}
-{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-22 06:53:52"}
-{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-22 06:53:52"}
-{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-22 06:53:52"}
+{"level":"warn","message":"⚠️ Mongoose disconnected from MongoDB","service":"driveready-api","timestamp":"2025-06-22 13:59:54"}
+{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-25 12:16:43"}
+{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:16:43"}
+{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-25 12:16:43"}
+{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:16:43"}
+{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-25 12:16:43"}
+{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-25 12:16:43"}
+{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-25 12:16:43"}
+{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-25 12:16:43"}
+{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-25 12:16:43"}
+{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-25 12:16:43"}
+{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-25 12:16:43"}
+{"level":"error","message":"Socket authentication failed: jwt malformed","name":"JsonWebTokenError","service":"driveready-api","stack":"JsonWebTokenError: jwt malformed\n    at Object.module.exports [as verify] (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/jsonwebtoken/verify.js:70:17)\n    at SocketService.authenticateSocket (/media/kiddo/others/projects/josnet/drive_assess_server/src/services/SocketService.ts:61:27)\n    at run (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:130:19)\n    at Namespace.run (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:141:9)\n    at Namespace._add (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:218:14)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","timestamp":"2025-06-25 12:19:53"}
+{"level":"error","message":"Socket authentication failed: jwt malformed","name":"JsonWebTokenError","service":"driveready-api","stack":"JsonWebTokenError: jwt malformed\n    at Object.module.exports [as verify] (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/jsonwebtoken/verify.js:70:17)\n    at SocketService.authenticateSocket (/media/kiddo/others/projects/josnet/drive_assess_server/src/services/SocketService.ts:61:27)\n    at run (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:130:19)\n    at Namespace.run (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:141:9)\n    at Namespace._add (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:218:14)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","timestamp":"2025-06-25 12:19:53"}
+{"level":"error","message":"Socket authentication failed: jwt malformed","name":"JsonWebTokenError","service":"driveready-api","stack":"JsonWebTokenError: jwt malformed\n    at Object.module.exports [as verify] (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/jsonwebtoken/verify.js:70:17)\n    at SocketService.authenticateSocket (/media/kiddo/others/projects/josnet/drive_assess_server/src/services/SocketService.ts:61:27)\n    at run (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:130:19)\n    at Namespace.run (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:141:9)\n    at Namespace._add (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:218:14)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","timestamp":"2025-06-25 12:21:25"}
+{"level":"error","message":"Socket authentication failed: jwt malformed","name":"JsonWebTokenError","service":"driveready-api","stack":"JsonWebTokenError: jwt malformed\n    at Object.module.exports [as verify] (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/jsonwebtoken/verify.js:70:17)\n    at SocketService.authenticateSocket (/media/kiddo/others/projects/josnet/drive_assess_server/src/services/SocketService.ts:61:27)\n    at run (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:130:19)\n    at Namespace.run (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:141:9)\n    at Namespace._add (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:218:14)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","timestamp":"2025-06-25 12:21:25"}
+{"level":"error","message":"Socket authentication failed: jwt malformed","name":"JsonWebTokenError","service":"driveready-api","stack":"JsonWebTokenError: jwt malformed\n    at Object.module.exports [as verify] (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/jsonwebtoken/verify.js:70:17)\n    at SocketService.authenticateSocket (/media/kiddo/others/projects/josnet/drive_assess_server/src/services/SocketService.ts:61:27)\n    at run (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:130:19)\n    at Namespace.run (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:141:9)\n    at Namespace._add (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:218:14)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","timestamp":"2025-06-25 12:22:22"}
+{"level":"error","message":"Socket authentication failed: jwt malformed","name":"JsonWebTokenError","service":"driveready-api","stack":"JsonWebTokenError: jwt malformed\n    at Object.module.exports [as verify] (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/jsonwebtoken/verify.js:70:17)\n    at SocketService.authenticateSocket (/media/kiddo/others/projects/josnet/drive_assess_server/src/services/SocketService.ts:61:27)\n    at run (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:130:19)\n    at Namespace.run (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:141:9)\n    at Namespace._add (/media/kiddo/others/projects/josnet/drive_assess_server/node_modules/socket.io/dist/namespace.js:218:14)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","timestamp":"2025-06-25 12:22:22"}
+{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-25 12:28:19"}
+{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:28:19"}
+{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-25 12:28:19"}
+{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:28:19"}
+{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-25 12:28:19"}
+{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-25 12:28:19"}
+{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-25 12:28:19"}
+{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-25 12:28:19"}
+{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-25 12:28:19"}
+{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-25 12:28:19"}
+{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-25 12:28:19"}
+{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-25 12:28:58"}
+{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:28:58"}
+{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-25 12:28:58"}
+{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:28:58"}
+{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-25 12:28:58"}
+{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-25 12:28:58"}
+{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-25 12:28:58"}
+{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-25 12:28:58"}
+{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-25 12:28:58"}
+{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-25 12:28:58"}
+{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-25 12:28:58"}
+{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-25 12:29:34"}
+{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:29:34"}
+{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-25 12:29:34"}
+{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:29:34"}
+{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-25 12:29:34"}
+{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-25 12:29:34"}
+{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-25 12:29:34"}
+{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-25 12:29:34"}
+{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-25 12:29:34"}
+{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-25 12:29:34"}
+{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-25 12:29:34"}
+{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-25 12:30:13"}
+{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:30:13"}
+{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-25 12:30:13"}
+{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:30:13"}
+{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-25 12:30:13"}
+{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-25 12:30:13"}
+{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-25 12:30:13"}
+{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-25 12:30:13"}
+{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-25 12:30:13"}
+{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-25 12:30:13"}
+{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-25 12:30:13"}
+{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-25 12:37:43"}
+{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:37:43"}
+{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-25 12:37:43"}
+{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:37:43"}
+{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-25 12:37:43"}
+{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-25 12:37:43"}
+{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-25 12:37:43"}
+{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-25 12:37:43"}
+{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-25 12:37:43"}
+{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-25 12:37:43"}
+{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-25 12:37:43"}
+{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-25 12:40:20"}
+{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:40:20"}
+{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-25 12:40:20"}
+{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:40:20"}
+{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-25 12:40:20"}
+{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-25 12:40:20"}
+{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-25 12:40:20"}
+{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-25 12:40:20"}
+{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-25 12:40:20"}
+{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-25 12:40:20"}
+{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-25 12:40:20"}
+{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-25 12:43:08"}
+{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:43:08"}
+{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-25 12:43:08"}
+{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:43:08"}
+{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-25 12:43:08"}
+{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-25 12:43:08"}
+{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-25 12:43:08"}
+{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-25 12:43:08"}
+{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-25 12:43:08"}
+{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-25 12:43:08"}
+{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-25 12:43:08"}
+{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-25 12:43:26"}
+{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:43:26"}
+{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-25 12:43:26"}
+{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:43:26"}
+{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-25 12:43:26"}
+{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-25 12:43:26"}
+{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-25 12:43:26"}
+{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-25 12:43:26"}
+{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-25 12:43:26"}
+{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-25 12:43:26"}
+{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-25 12:43:26"}
+{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-25 12:44:15"}
+{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:44:15"}
+{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-25 12:44:15"}
+{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:44:15"}
+{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-25 12:44:15"}
+{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-25 12:44:15"}
+{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-25 12:44:15"}
+{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-25 12:44:15"}
+{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-25 12:44:15"}
+{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-25 12:44:15"}
+{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-25 12:44:15"}
+{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-25 12:44:30"}
+{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:44:30"}
+{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-25 12:44:30"}
+{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:44:30"}
+{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-25 12:44:30"}
+{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-25 12:44:30"}
+{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-25 12:44:30"}
+{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-25 12:44:30"}
+{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-25 12:44:30"}
+{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-25 12:44:30"}
+{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-25 12:44:30"}
+{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-25 12:46:02"}
+{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:46:02"}
+{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-25 12:46:02"}
+{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:46:02"}
+{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-25 12:46:02"}
+{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-25 12:46:02"}
+{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-25 12:46:02"}
+{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-25 12:46:02"}
+{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-25 12:46:02"}
+{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-25 12:46:02"}
+{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-25 12:46:02"}
+{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-25 12:46:16"}
+{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:46:16"}
+{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-25 12:46:16"}
+{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:46:16"}
+{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-25 12:46:16"}
+{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-25 12:46:16"}
+{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-25 12:46:16"}
+{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-25 12:46:16"}
+{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-25 12:46:16"}
+{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-25 12:46:16"}
+{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-25 12:46:16"}
+{"level":"info","message":"🔗 Mongoose connected to MongoDB","service":"driveready-api","timestamp":"2025-06-25 12:47:22"}
+{"level":"info","message":"🗄️ MongoDB connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:47:22"}
+{"level":"info","message":"📍 Database: drive","service":"driveready-api","timestamp":"2025-06-25 12:47:22"}
+{"level":"info","message":"✅ Database connected successfully","service":"driveready-api","timestamp":"2025-06-25 12:47:22"}
+{"level":"info","message":"🔌 Socket.IO service initialized","service":"driveready-api","timestamp":"2025-06-25 12:47:22"}
+{"level":"info","message":"✅ Socket.IO initialized","service":"driveready-api","timestamp":"2025-06-25 12:47:22"}
+{"level":"info","message":"✅ Server started successfully","service":"driveready-api","timestamp":"2025-06-25 12:47:22"}
+{"level":"info","message":"🚀 Server running on port 5000","service":"driveready-api","timestamp":"2025-06-25 12:47:22"}
+{"level":"info","message":"🌍 Environment: development","service":"driveready-api","timestamp":"2025-06-25 12:47:23"}
+{"level":"info","message":"📡 Socket.IO enabled on same port","service":"driveready-api","timestamp":"2025-06-25 12:47:23"}
+{"level":"info","message":"🇨🇦 DriveReady Backend - Ready to serve!","service":"driveready-api","timestamp":"2025-06-25 12:47:23"}
