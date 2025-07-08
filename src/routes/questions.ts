@@ -18,29 +18,18 @@ const questionController = new QuestionController()
 
 // Validation rules
 const createQuestionValidation = [
-  body("title").trim().isLength({ min: 3, max: 200 }).withMessage("Title must be between 3 and 200 characters"),
-  body("content").trim().isLength({ min: 10, max: 2000 }).withMessage("Content must be between 10 and 2000 characters"),
-  body("type").isIn(["multiple_choice", "true_false", "essay", "fill_blank"]).withMessage("Invalid question type"),
+  body("question").trim().isLength({ min: 3, max: 200 }).withMessage("Title must be between 3 and 200 characters"),
   body("category").isMongoId().withMessage("Valid category ID is required"),
   body("difficulty").isIn(["easy", "normal", "hard"]).withMessage("Invalid difficulty level"),
   body("points").isInt({ min: 1, max: 10 }).withMessage("Points must be between 1 and 10"),
 ]
 
 const updateQuestionValidation = [
-  body("title")
+  body("question")
     .optional()
     .trim()
     .isLength({ min: 3, max: 200 })
     .withMessage("Title must be between 3 and 200 characters"),
-  body("content")
-    .optional()
-    .trim()
-    .isLength({ min: 10, max: 2000 })
-    .withMessage("Content must be between 10 and 2000 characters"),
-  body("type")
-    .optional()
-    .isIn(["multiple_choice", "true_false", "essay", "fill_blank"])
-    .withMessage("Invalid question type"),
   body("difficulty").optional().isIn(["easy", "normal", "hard"]).withMessage("Invalid difficulty level"),
   body("points").optional().isInt({ min: 1, max: 10 }).withMessage("Points must be between 1 and 10"),
 ]

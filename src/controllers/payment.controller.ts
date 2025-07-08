@@ -16,6 +16,7 @@ import { User } from "../models/users/User"
 import { Logger } from "../utils/Logger"
 import { Types } from "mongoose"
 import { Subscription } from "../models/users/Subscription"
+import { Metadata } from "../models/payments/Metadata"
 
 export class PaymentController {
   public getAllPayments = async (req: Request, res: Response): Promise<void> => {
@@ -99,22 +100,43 @@ export class PaymentController {
         return
       }
 
-      const paymentData = {
-        ...req.body,
-        user: (req as any).user.userId,
-        metadata: {
-          ...req.body.metadata,
-          ipAddress: req.ip,
-          userAgent: req.get("User-Agent"),
-        },
+      const metadatas = {
+        ...req.body.metadata,
+        ipAddress: req.ip,
+        userAgent: req.get("User-Agent"),
       }
 
-      const payment = new Payment(paymentData)
-      await payment.save()
+      const metadata = await new Metadata(metadatas).save()
 
+      const user = await User.findById(req.body.user.userId)
+
+      if (!user) {
+        res.status(404).json({
+          success: false,
+          message: "User not found",
+        })
+        return
+      }
+
+      const paymentData = {
+        ...req.body,
+        user: req.body.user.userId,
+        metadata: metadata._id
+      }
+
+      const payment = await new Payment(paymentData).save()
+
+      if (!payment) {
+        res.status(500).json({
+          success: false,
+          message: "Failed to create payment",
+        })
+        return
+      }
+  
       // Update user subscription if payment is for subscription
       if (payment.type === "subscription" && payment.status === "completed") {
-        await this.updateUserSubscription(payment)
+        await this.updateUserSubscription(req.body.user.userId, payment,payment.subscription?._id,)
       }
 
       await payment.populate("user", "name email")
@@ -151,11 +173,11 @@ export class PaymentController {
 
       payment.status = status
       if (transactionId) payment.transactionId = transactionId
-      await payment.save()
+      const savedPayment = await payment.save()
 
       // Update user subscription if payment is completed
       if (payment.type === "subscription" && status === "completed") {
-        await this.updateUserSubscription(payment)
+        await this.updateUserSubscription( savedPayment.user, savedPayment,savedPayment.subscription?._id,)
       }
 
       Logger.info(`Payment status updated: ${payment._id} - ${status}`)
@@ -163,7 +185,7 @@ export class PaymentController {
       res.status(200).json({
         success: true,
         message: "Payment status updated successfully",
-        data: { payment },
+        data: { savedPayment },
       })
     } catch (error: any) {
       Logger.error("Update payment status error:", error)
@@ -200,7 +222,6 @@ export class PaymentController {
       const refundPayment = new Payment({
         user: originalPayment.user,
         type: "refund",
-        plan: originalPayment.plan,
         amount: -originalPayment.amount,
         currency: originalPayment.currency,
         status: "completed",
@@ -220,7 +241,7 @@ export class PaymentController {
 
       // Update user subscription if needed
       if (originalPayment.type === "subscription") {
-        await this.cancelUserSubscription(originalPayment.user, originalPayment.subscription, reason)
+        await this.cancelUserSubscription(originalPayment.user, reason,originalPayment.subscription?._id,)
       }
 
       Logger.info(`Refund processed: ${refundPayment._id} for payment ${originalPayment._id}`)
@@ -287,20 +308,22 @@ export class PaymentController {
     }
   }
 
-  private async updateUserSubscription(subscriptionId: Types.ObjectId, userId: Types.ObjectId, payment: IPayment): Promise<void> {
+  private async updateUserSubscription( userId: Types.ObjectId, payment: IPayment,subscriptionId?: Types.ObjectId): Promise<void> {
     try {
       const user = await User.findById(payment.user)
+        // find subscriptions for that user 
+      const subscription = await Subscription.findOne(subscriptionId)
+
+      if(!subscription) return
+
       if (!user) return
 
-      const subscriptionDays = this.getSubscriptionDays(payment.plan)
+      const subscriptionDays = this.getSubscriptionDays(subscription.plan)
       const startDate = new Date()
       const endDate = new Date(startDate.getTime() + subscriptionDays * 24 * 60 * 60 * 1000)
 
-      // find subscriptions for that user 
-      const subscription = await Subscription.findOne(subscriptionId)
-
+    
       if (subscription) {
-        subscription.type = payment.plan  
         subscription.startDate = startDate
         subscription.endDate = endDate
         subscription.isActive = true
@@ -308,20 +331,19 @@ export class PaymentController {
       } else {
         await Subscription.create({
           user: userId,
-          type: payment.plan,
           startDate,
           endDate,
           isActive: true,
         })
       }
 
-      Logger.info(`User subscription updated: ${user.email} - ${payment.plan}`)
+      Logger.info(`User subscription updated: ${user.email} - ${subscription.plan}`)
     } catch (error: any) {
       Logger.error("Update user subscription error:", error)
     }
   }
 
-  private async cancelUserSubscription(userId: Types.ObjectId, subcriptionId: Types.ObjectId, reason: string): Promise<void> {
+  private async cancelUserSubscription(userId: Types.ObjectId, reason: string,subcriptionId?: Types.ObjectId,): Promise<void> {
     try {
       const subscription = await Subscription.findOne({ _id: subcriptionId, isActive: true ,user: userId })
 

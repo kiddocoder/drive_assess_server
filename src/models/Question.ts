@@ -12,9 +12,8 @@
 import mongoose, { type Document, Schema } from "mongoose"
 
 export interface IQuestion extends Document {
-  title: string
-  content: string
-  type: "multiple_choice" | "true_false" | "essay" | "fill_blank"
+  question: string
+  content: string | null
   category: mongoose.Types.ObjectId
   difficulty: "easy" | "normal" | "hard"
   options?: {
@@ -43,7 +42,7 @@ export interface IQuestion extends Document {
 
 const questionSchema = new Schema<IQuestion>(
   {
-    title: {
+    question: {
       type: String,
       required: [true, "Question title is required"],
       trim: true,
@@ -51,14 +50,9 @@ const questionSchema = new Schema<IQuestion>(
     },
     content: {
       type: String,
-      required: [true, "Question content is required"],
+      default:null,
       trim: true,
       maxlength: [2000, "Content cannot exceed 2000 characters"],
-    },
-    type: {
-      type: String,
-      enum: ["multiple_choice", "true_false", "essay", "fill_blank"],
-      required: [true, "Question type is required"],
     },
     category: {
       type: Schema.Types.ObjectId,
@@ -72,26 +66,13 @@ const questionSchema = new Schema<IQuestion>(
     },
     options: [
       {
-        text: {
-          type: String,
-          required: true,
-          trim: true,
-          maxlength: [500, "Option text cannot exceed 500 characters"],
-        },
-        isCorrect: {
-          type: Boolean,
-          required: true,
-        },
-        explanation: {
-          type: String,
-          trim: true,
-          maxlength: [1000, "Explanation cannot exceed 1000 characters"],
-        },
-      },
+        type:String,
+        default:""
+      }
     ],
     correctAnswer: {
-      type: String,
-      trim: true,
+      type: Number,
+      default:1
     },
     explanation: {
       type: String,
@@ -100,7 +81,6 @@ const questionSchema = new Schema<IQuestion>(
     },
     points: {
       type: Number,
-      required: [true, "Points are required"],
       min: [1, "Points must be at least 1"],
       max: [10, "Points cannot exceed 10"],
       default: 1,
@@ -109,6 +89,7 @@ const questionSchema = new Schema<IQuestion>(
       type: Number,
       min: [10, "Time limit must be at least 10 seconds"],
       max: [600, "Time limit cannot exceed 10 minutes"],
+      default:10,
     },
     media: [
       {
@@ -119,7 +100,8 @@ const questionSchema = new Schema<IQuestion>(
         },
         url: {
           type: String,
-          required: true,
+          required: false,
+          default:null,
         },
         alt: {
           type: String,

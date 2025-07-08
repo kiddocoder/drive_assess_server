@@ -25,6 +25,9 @@ import userRoutes from "./users"
 import testRoutes from "./tests"
 import paymentRoutes from "./payments"
 import uploadRoutes from "./upload"
+import categoryRoutes from "./categories"
+import questionRoutes from"./questions"
+import roleRoutes from "./roles"
 
 const router = Router()
 
@@ -32,7 +35,7 @@ const router = Router()
 router.get("/health", (req, res) => {
   res.status(200).json({
     success: true,
-    message: "DriveReady API is running",
+    message: "DriveAccess API is running",
     timestamp: new Date().toISOString(),
     version: "1.0.0",
   })
@@ -42,8 +45,11 @@ router.get("/health", (req, res) => {
 router.use("/auth", authRoutes)
 router.use("/dashboard", dashboardRoutes)
 router.use("/users", userRoutes)
+router.use("/questions",questionRoutes)
+router.use("/categories",categoryRoutes)
 router.use("/tests", testRoutes)
 router.use("/payments", paymentRoutes)
 router.use("/upload", uploadRoutes)
+router.use("/roles",roleRoutes)
 
 export default router

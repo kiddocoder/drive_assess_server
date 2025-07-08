@@ -57,15 +57,13 @@ export class QuestionController {
 
       res.status(200).json({
         success: true,
-        data: {
-          questions,
-          pagination: {
+         pagination: {
             current: Number(page),
             pages: Math.ceil(total / Number(limit)),
             total,
             limit: Number(limit),
           },
-        },
+        data: questions,
       })
     } catch (error: any) {
       Logger.error("Get all questions error:", error)
@@ -127,7 +125,7 @@ export class QuestionController {
 
       await question.populate("category", "name color")
 
-      Logger.info(`Question created: ${question.title} by ${(req as any).user.userId}`)
+      Logger.info(`Question created: ${question.question} by ${(req as any).user.userId}`)
 
       res.status(201).json({
         success: true,
@@ -162,7 +160,7 @@ export class QuestionController {
         return
       }
 
-      Logger.info(`Question updated: ${question.title}`)
+      Logger.info(`Question updated: ${question.question}`)
 
       res.status(200).json({
         success: true,
@@ -191,7 +189,7 @@ export class QuestionController {
         return
       }
 
-      Logger.info(`Question deleted: ${question.title}`)
+      Logger.info(`Question deleted: ${question.question}`)
 
       res.status(200).json({
         success: true,

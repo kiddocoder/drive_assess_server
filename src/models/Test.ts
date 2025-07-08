@@ -14,15 +14,16 @@ import mongoose, { type Document, Schema } from "mongoose"
 export interface ITest extends Document {
   title: string
   description: string
-  category: mongoose.Types.ObjectId
   instructor: mongoose.Types.ObjectId
   questions: mongoose.Types.ObjectId[]
-  difficulty: "easy" | "normal" | "hard"
   timeLimit: number // in minutes
   passingScore: number // percentage
   maxAttempts: number
+  attempts: number
   isActive: boolean
   isPublished: boolean
+  points:number
+  status:string
   settings: {
     shuffleQuestions: boolean
     shuffleAnswers: boolean
@@ -48,40 +49,39 @@ const testSchema = new Schema<ITest>(
     },
     description: {
       type: String,
-      required: [true, "Test description is required"],
-      trim: true,
-      maxlength: [1000, "Description cannot exceed 1000 characters"],
-    },
-    category: {
-      type: Schema.Types.ObjectId,
-      ref: "Category",
-      required: [true, "Test category is required"],
+      required: false,
+      default:""
     },
     instructor: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: [true, "Instructor is required"],
+      required: false,
+      default:null
     },
     questions: [
       {
         type: Schema.Types.ObjectId,
         ref: "Question",
+        default: null,
       },
     ],
-    difficulty: {
-      type: String,
-      enum: ["easy", "normal", "hard"],
-      required: [true, "Difficulty level is required"],
+    points:{
+      type:Number,
+      default:0
+    },
+    status:{
+      type:String,
+      default:"active"
     },
     timeLimit: {
       type: Number,
-      required: [true, "Time limit is required"],
+      default:1,
       min: [1, "Time limit must be at least 1 minute"],
       max: [300, "Time limit cannot exceed 300 minutes"],
     },
     passingScore: {
       type: Number,
-      required: [true, "Passing score is required"],
+      required: false,
       min: [0, "Passing score cannot be negative"],
       max: [100, "Passing score cannot exceed 100%"],
       default: 70,
@@ -90,7 +90,11 @@ const testSchema = new Schema<ITest>(
       type: Number,
       default: 3,
       min: [1, "Must allow at least 1 attempt"],
-      max: [10, "Cannot exceed 10 attempts"],
+    },
+    attempts: {
+      type: Number,
+      default: 1,
+      min: [0, "Attempts cannot be negative"],
     },
     isActive: {
       type: Boolean,
@@ -153,9 +157,7 @@ const testSchema = new Schema<ITest>(
 )
 
 // Indexes for performance
-testSchema.index({ category: 1 })
 testSchema.index({ instructor: 1 })
-testSchema.index({ difficulty: 1 })
 testSchema.index({ isActive: 1, isPublished: 1 })
 testSchema.index({ tags: 1 })
 

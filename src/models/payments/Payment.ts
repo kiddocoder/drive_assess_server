@@ -13,7 +13,6 @@ import mongoose, { type Document, Schema } from "mongoose"
 export interface IPayment extends Document {
   user: mongoose.Types.ObjectId
   type: "subscription" | "test_purchase" | "certificate" | "refund"
-  plan: "free" | "3-day" | "4-day" | "premium" | "single-test"
   amount: number
   currency: string
   status: "pending" | "completed" | "failed" | "refunded" | "cancelled"
@@ -42,11 +41,6 @@ export const paymentSchema = new Schema<IPayment>(
       type: String,
       enum: ["subscription", "test_purchase", "certificate", "refund"],
       required: [true, "Payment type is required"],
-    },
-    plan: {
-      type: String,
-      enum: ["3-day", "4-day", "premium", "single-test"],
-      required: [true, "Plan is required"],
     },
     amount: {
       type: Number,

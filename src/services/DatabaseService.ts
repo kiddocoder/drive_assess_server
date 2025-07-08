@@ -16,13 +16,18 @@
 
 import mongoose from "mongoose"
 import { Logger } from "../utils/Logger"
+import seedUsers from "../seeders/user"
+import seedRoles from "../seeders/role"
+import seedCategories from "../seeders/category"
+import seedTests from "../seeders/Test"
+import seedStudents from "../seeders/Student"
 
 export class DatabaseService {
   private connectionString: string
   private isConnected = false
 
   constructor() {
-    this.connectionString = process.env.MONGODB_URI || "mongodb+srv://novadiscova:Nova123@cluster0.dhz0o.mongodb.net/drive"
+    this.connectionString = String(process.env.MONGODB_URI)
     this.setupEventListeners()
   }
 
@@ -32,7 +37,7 @@ export class DatabaseService {
         maxPoolSize: 10, // Maintain up to 10 socket connections
         serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
         socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-        bufferCommands: false, // Disable mongoose buffering
+        bufferCommands: true, // Disable mongoose buffering
       }
 
       await mongoose.connect(this.connectionString, options)
@@ -96,4 +101,16 @@ export class DatabaseService {
       mongoose.set("debug", true)
     }
   }
+
+  public async  seed(){
+        if(process.env.NODE_ENV === "development"){
+            // we will run all our seeders here
+            await seedRoles();
+            await seedUsers();
+            await seedCategories()
+            await seedTests();
+            await seedStudents();
+        }
+ }
+
 }

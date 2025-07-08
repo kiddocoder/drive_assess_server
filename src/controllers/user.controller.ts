@@ -15,6 +15,7 @@ import { User } from "../models/users/User"
 import { Result } from "../models/Result"
 import { Payment } from "../models/payments/Payment"
 import { Logger } from "../utils/Logger"
+import { Role } from "../models/users/Role"
 
 export class UserController {
   public getAllUsers = async (req: Request, res: Response): Promise<void> => {
@@ -23,7 +24,7 @@ export class UserController {
 
       // Build filter object
       const filter: any = {}
-      if (role) filter.role = role
+      if (role) filter.role.name = role
       if (search) {
         filter.$or = [{ name: { $regex: search, $options: "i" } }, { email: { $regex: search, $options: "i" } }]
       }
@@ -42,15 +43,104 @@ export class UserController {
 
       res.status(200).json({
         success: true,
-        data: {
-          users,
-          pagination: {
+           pagination: {
             current: Number(page),
             pages: Math.ceil(total / Number(limit)),
             total,
             limit: Number(limit),
           },
-        },
+          data:users,
+      })
+    } catch (error: any) {
+      Logger.error("Get all users error:", error)
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch users",
+      })
+    }
+  }
+
+  public getAdmins = async (req: Request, res: Response): Promise<void> => {
+      try {
+      const { page = 1, limit = 10,search, sortBy = "createdAt", sortOrder = "desc", isActive } = req.query
+
+      // Build filter object
+      const role = await Role.findOne({name:"admin"})
+      const filter: any = {}
+      if(role){
+        filter.role = role._id
+      }
+     
+      if (search) {
+        filter.$or = [{ name: { $regex: search, $options: "i" } }, { email: { $regex: search, $options: "i" } }]
+      }
+      if (isActive !== undefined) filter.isActive = isActive === "true"
+
+      // Build sort object
+      const sort: any = {}
+      sort[sortBy as string] = sortOrder === "desc" ? -1 : 1
+
+      const skip = (Number(page) - 1) * Number(limit)
+
+      const [users, total] = await Promise.all([
+        User.find(filter).sort(sort).skip(skip).limit(Number(limit)).select("-password"),
+        User.countDocuments(filter),
+      ])
+
+      res.status(200).json({
+        success: true,
+        pagination: {
+            current: Number(page),
+            pages: Math.ceil(total / Number(limit)),
+            total,
+            limit: Number(limit),
+          },
+        data:users,
+      })
+    } catch (error: any) {
+      Logger.error("Get all users error:", error)
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch users",
+      })
+    }
+  }
+
+  public getStudents = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { page = 1, limit = 10, search, sortBy = "createdAt", sortOrder = "desc", isActive } = req.query
+
+      // Build filter object
+      const filter: any = {}
+       const role = await Role.findOne({name:"student"})
+
+      if (role) filter.role = role._id
+
+      if (search) {
+        filter.$or = [{ name: { $regex: search, $options: "i" } }, { email: { $regex: search, $options: "i" } }]
+      }
+      if (isActive !== undefined) filter.isActive = isActive === "true"
+
+      // Build sort object
+      const sort: any = {}
+      sort[sortBy as string] = sortOrder === "desc" ? -1 : 1
+
+      const skip = (Number(page) - 1) * Number(limit)
+
+      const [users, total] = await Promise.all([
+        User.find(filter).sort(sort).skip(skip).limit(Number(limit)).select("-password"),
+        User.countDocuments(filter),
+      ])
+
+      res.status(200).json({
+        success: true,
+           pagination: {
+            current: Number(page),
+            pages: Math.ceil(total / Number(limit)),
+            total,
+            limit: Number(limit),
+          },
+          data:users,
       })
     } catch (error: any) {
       Logger.error("Get all users error:", error)
@@ -130,7 +220,7 @@ export class UserController {
         return
       }
 
-      const user = new User(userData)
+      const user = new User({...userData,password:'12345678'})
       await user.save()
 
       Logger.info(`User created: ${user.email} by admin`)

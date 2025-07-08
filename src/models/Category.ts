@@ -16,7 +16,6 @@ export interface ICategory extends Document {
   slug: string
   parent?: mongoose.Types.ObjectId
   icon?: string
-  color?: string
   isActive: boolean
   sortOrder: number
   metadata: {
@@ -44,7 +43,7 @@ const categorySchema = new Schema<ICategory>(
     },
     slug: {
       type: String,
-      required: [true, "Slug is required"],
+      required: false,
       unique: true,
       lowercase: true,
       trim: true,
@@ -58,12 +57,6 @@ const categorySchema = new Schema<ICategory>(
     icon: {
       type: String,
       trim: true,
-    },
-    color: {
-      type: String,
-      trim: true,
-      match: [/^#[0-9A-F]{6}$/i, "Color must be a valid hex color"],
-      default: "#dc2626",
     },
     isActive: {
       type: Boolean,
@@ -93,13 +86,18 @@ const categorySchema = new Schema<ICategory>(
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: [true, "Creator is required"],
+      required: false,
+      default:null
     },
   },
   {
     timestamps: true,
   },
 )
+
+categorySchema.pre('save',function (){
+  this.slug = this.name.split(' ').join('-')
+})
 
 // Indexes for performance
 categorySchema.index({ parent: 1 })

@@ -23,7 +23,6 @@ export class TestController {
       const {
         page = 1,
         limit = 10,
-        category,
         difficulty,
         instructor,
         search,
@@ -34,7 +33,6 @@ export class TestController {
 
       // Build filter object
       const filter: any = {}
-      if (category) filter.category = category
       if (difficulty) filter.difficulty = difficulty
       if (instructor) filter.instructor = instructor
       if (status) {
@@ -53,7 +51,6 @@ export class TestController {
 
       const [tests, total] = await Promise.all([
         Test.find(filter)
-          .populate("category", "name color")
           .populate("instructor", "name email")
           .sort(sort)
           .skip(skip)
@@ -63,15 +60,13 @@ export class TestController {
 
       res.status(200).json({
         success: true,
-        data: {
-          tests,
           pagination: {
             current: Number(page),
             pages: Math.ceil(total / Number(limit)),
             total,
             limit: Number(limit),
           },
-        },
+        data: tests,
       })
     } catch (error: any) {
       Logger.error("Get all tests error:", error)
@@ -144,7 +139,7 @@ export class TestController {
       const test = new Test(testData)
       await test.save()
 
-      await test.populate("category", "name color")
+      await test.populate("category", "name")
 
       Logger.info(`Test created: ${test.title} by ${(req as any).user.userId}`)
 
@@ -266,6 +261,78 @@ export class TestController {
       })
     }
   }
+
+  public addQuestionsToTest = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { testId } = req.params;
+    const { questionIds } = req.body;
+
+    // Check if test exists
+    const test = await Test.findById(testId);
+    if (!test) {
+      res.status(404).json({
+        success: false,
+        message: "Test not found",
+      });
+      return;
+    }
+
+
+
+    // Add new questions
+
+    test.questions.push(questionIds);
+    const updatedTest = await test.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Questions added to test successfully",
+      test:updatedTest,
+    });
+  } catch (error: any) {
+    Logger.error("Add questions to test error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to add questions to test",
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined,
+    });
+  }
+};
+
+public removeQuestionsFromTest = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { testId } = req.params;
+    const { questionIds } = req.body;
+
+    // Check if test exists
+    const test = await Test.findById(testId);
+    if (!test) {
+      res.status(404).json({
+        success: false,
+        message: "Test not found",
+      });
+      return;
+    }
+
+    const updatedTest = await test.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Questions removed from test successfully",
+      data: { 
+        test: updatedTest,
+        remainingCount: updatedTest.questions.length
+      },
+    });
+  } catch (error: any) {
+    Logger.error("Remove questions from test error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to remove questions from test",
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined,
+    });
+  }
+};
 
   public addQuestionToTest = async (req: Request, res: Response): Promise<void> => {
     try {

@@ -36,16 +36,16 @@ export class SocketService {
     this.httpServer = httpServer;
     this.io = new SocketIOServer(this.httpServer, {
       cors: {
-        origin: [process.env.FRONTEND_URL || "http://localhost:5173"],
+        origin: [String(process.env.FRONTEND_URL)],
         methods: ["GET", "POST"],
         credentials: true,
       },
-      transports: ["websocket", "polling"],
+      transports: ["websocket"],
     }) 
   }
 
   public initialize(): void {
-    this.io.use(this.authenticateSocket.bind(this))
+    // this.io.use(this.authenticateSocket.bind(this))
     this.io.on("connection", this.handleConnection.bind(this))
     Logger.info("🔌 Socket.IO service initialized")
   }

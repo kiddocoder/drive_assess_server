@@ -98,23 +98,14 @@ export class AuthController {
   }
 
   public login = async (req: Request, res: Response): Promise<void> => {
+     console.log(req.body)
     try {
-      // Check validation errors
-      const errors = validationResult(req)
-      if (!errors.isEmpty()) {
-        res.status(400).json({
-          success: false,
-          message: "Validation failed",
-          errors: errors.array(),
-        })
-        return
-      }
-
-      const { email, password } = req.body
+      const { identifier, password } = req.body
+      const email = identifier;
 
       // Find user and include password for comparison
       const user = await User.findOne({ email }).select("+password")
-      .populate("subscriptions")
+      .populate("subscription")
       .populate("role");
 
       if (!user) {
@@ -168,21 +159,27 @@ export class AuthController {
 
       Logger.info(`User logged in: ${email} (${user.role})`)
 
+
+      res.cookie("accessToken", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: "strict",
+        maxAge: 24 * 60 * 60 * 1000,
+      })
+
       res.status(200).json({
         success: true,
         message: "Login successful",
-        data: {
-          user: {
+        user: {
             id: user._id,
             name: user.name,
             email: user.email,
             role: user.role,
             isEmailVerified: user.isEmailVerified,
             lastLogin: user.lastLogin,
-            subscription: user.subscriptions,
-          },
-          token,
+            subscription: user.subscription,
         },
+      token,
       })
     } catch (error: any) {
       Logger.error("Login error:", error)

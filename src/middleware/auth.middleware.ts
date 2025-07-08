@@ -24,7 +24,7 @@ export const authenticateToken = async (req: AuthRequest, res: Response, next: N
   try {
     const authHeader = req.headers.authorization
     const token = authHeader && authHeader.split(" ")[1] // Bearer TOKEN
-
+    
     if (!token) {
       res.status(401).json({
         success: false,
@@ -37,7 +37,7 @@ export const authenticateToken = async (req: AuthRequest, res: Response, next: N
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any
 
     // Check if user still exists and is active
-    const user = await User.findById(decoded.userId)
+    const user = await User.findById(decoded._id)
     if (!user || !user.isActive) {
       res.status(401).json({
         success: false,
@@ -48,8 +48,8 @@ export const authenticateToken = async (req: AuthRequest, res: Response, next: N
 
     // Add user info to request
     req.user = {
-      userId: decoded.userId,
-      role: decoded.role,
+      userId: decoded._id,
+      role: decoded.role.name,
     }
 
     next()

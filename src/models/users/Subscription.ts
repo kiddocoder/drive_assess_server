@@ -3,7 +3,7 @@ import mongoose, { type Document, Schema } from "mongoose"
 
 export interface ISubscription extends Document {
   status: "pending" | "active" | "draft" | "completed" | "failed" | "refunded" | "cancelled"
-  type: "free" | "3-day" | "4-day" | "premium" | "single-test"
+  plan: "free" | "3-day" | "4-day" | "premium" | "single-test"
   startDate: Date
   endDate?: Date
   autoRenew: boolean
@@ -18,7 +18,7 @@ export const subscriptionSchema = new Schema<ISubscription>({
     enum: ["pending", "active", "draft", "completed", "failed", "refunded", "cancelled"],
     default: "pending",
   },
-  type: {
+  plan: {
     type: String,
     enum: ["free", "3-day", "4-day", "premium", "single-test"],
     default: "free",

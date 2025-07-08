@@ -34,7 +34,7 @@ export class CategoryController {
 
       res.status(200).json({
         success: true,
-        data: { categories },
+        data: categories ,
       })
     } catch (error: any) {
       Logger.error("Get all categories error:", error)

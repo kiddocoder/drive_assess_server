@@ -31,7 +31,7 @@ export interface IUser extends Document {
   lastLogin?: Date
   loginAttempts: number
   lockUntil?: Date
-  subscriptions: mongoose.Types.ObjectId[]
+  subscription: mongoose.Types.ObjectId
   profile?: {
     bio?: string
     specialization?: string[]
@@ -89,12 +89,11 @@ const userSchema = new Schema<IUser>(
     phone: {
       type: String,
       trim: true,
-      match: [/^\+?[\d\s\-$$$$]+$/, "Please enter a valid phone number"],
     },
     location: {
       type: String,
       trim: true,
-      maxlength: [100, "Location cannot exceed 100 characters"],
+      maxlength: [255, "Location cannot exceed 255 characters"],
     },
     avatar: {
       type: String,
@@ -120,13 +119,13 @@ const userSchema = new Schema<IUser>(
       type: Date,
       default: null,
     },
-    subscriptions: [
+    subscription: 
       {
       type:mongoose.Schema.Types.ObjectId,
       ref:"Subscription",
       default: null
     }
-  ],
+  ,
     profile: {
       type: Schema.Types.ObjectId,
       ref: "Profile",
@@ -142,7 +141,7 @@ const userSchema = new Schema<IUser>(
   },
   {
     timestamps: true,
-    collection:"user",
+    collection:"users",
     toJSON: {
       transform: (doc, ret) => {
         delete ret.password
@@ -157,7 +156,7 @@ const userSchema = new Schema<IUser>(
 // Indexes for performance
 userSchema.index({ role: 1 })
 userSchema.index({ isActive: 1 })
-userSchema.index({ "subscription.type": 1 })
+userSchema.index({ "subscription.plan": 1 })
 
 // Pre-save middleware to hash password
 userSchema.pre("save", async function (next) {
@@ -219,7 +218,10 @@ userSchema.methods.generateToken = function():string{
     return this
   } ;
 
-  return jwt.sign(payload,process.env.JWT_SECRET || "Here",{
+  console.log(payload)
+
+  return jwt.sign(this.toJSON(),
+   process.env.JWT_SECRET || "Here",{
    expiresIn:"1d",
   })
 

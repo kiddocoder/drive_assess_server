@@ -21,12 +21,6 @@ const userController = new UserController()
 const createUserValidation = [
   body("name").trim().isLength({ min: 2, max: 100 }).withMessage("Name must be between 2 and 100 characters"),
   body("email").isEmail().normalizeEmail().withMessage("Please provide a valid email"),
-  body("password")
-    .isLength({ min: 6 })
-    .withMessage("Password must be at least 6 characters")
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
-    .withMessage("Password must contain at least one lowercase letter, one uppercase letter, and one number"),
-  body("role").isIn(["admin", "instructor", "student"]).withMessage("Invalid role"),
 ]
 
 const updateUserValidation = [
@@ -36,19 +30,22 @@ const updateUserValidation = [
     .isLength({ min: 2, max: 100 })
     .withMessage("Name must be between 2 and 100 characters"),
   body("email").optional().isEmail().normalizeEmail().withMessage("Please provide a valid email"),
-  body("role").optional().isIn(["admin", "instructor", "student"]).withMessage("Invalid role"),
+  body("role").optional().isIn(["admin", "instructor", "student","user"]).withMessage("Invalid role"),
 ]
 
 // All routes require authentication
 router.use(authenticateToken)
 
 // Routes
-router.get("/", requireRole(["admin"]), userController.getAllUsers)
+router.get("/", userController.getAllUsers) //, requireRole(["admin"])
 router.get("/stats", requireRole(["admin"]), userController.getUserStats)
-router.get("/:id", requireRole(["admin", "instructor"]), userController.getUserById)
+router.get("/user/:id", requireRole(["admin", "instructor"]), userController.getUserById)
 router.post("/", requireRole(["admin"]), createUserValidation, userController.createUser)
 router.put("/:id", requireRole(["admin"]), updateUserValidation, userController.updateUser)
-router.delete("/:id", requireRole(["admin"]), userController.deleteUser)
-router.patch("/:id/toggle-status", requireRole(["admin"]), userController.toggleUserStatus)
+router.delete("/user/:id", requireRole(["admin"]), userController.deleteUser)
+router.patch("/user/:id/toggle-status", requireRole(["admin"]), userController.toggleUserStatus)
+
+router.get("/admins", userController.getAdmins) //, requireRole(["admin"])
+router.get("/students", userController.getStudents) //, requireRole(["admin"])
 
 export default router
