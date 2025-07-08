@@ -44,7 +44,8 @@ router.post("/", requireRole(["admin", "instructor"]), createTestValidation, tes
 router.put("/:id", requireRole(["admin", "instructor"]), updateTestValidation, testController.updateTest)
 router.delete("/:id", requireRole(["admin", "instructor"]), testController.deleteTest)
 router.patch("/:id/publish", requireRole(["admin", "instructor"]), testController.publishTest)
-router.post("/:testId/questions/:questionId", requireRole(["admin", "instructor"]), testController.addQuestionToTest)
+router.post("/:testId/questions", requireRole(["admin", "instructor"]), testController.addQuestionsToTest)
+router.get("/:testId/questions", testController.getTestQuestions)  
 router.delete(
   "/:testId/questions/:questionId",
   requireRole(["admin", "instructor"]),

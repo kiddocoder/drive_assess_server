@@ -265,7 +265,7 @@ export class TestController {
   public addQuestionsToTest = async (req: Request, res: Response): Promise<void> => {
   try {
     const { testId } = req.params;
-    const { questionIds } = req.body;
+    const { questionIds }= req.body;
 
     // Check if test exists
     const test = await Test.findById(testId);
@@ -278,10 +278,15 @@ export class TestController {
     }
 
 
-
     // Add new questions
 
-    test.questions.push(questionIds);
+    questionIds.map((id:Types.ObjectId) =>{
+
+      if(!test.questions.includes(id)){
+        test.questions.push(id);
+      }
+    })
+
     const updatedTest = await test.save();
 
     res.status(200).json({
@@ -410,6 +415,28 @@ public removeQuestionsFromTest = async (req: Request, res: Response): Promise<vo
       })
     }
   }
+
+  public getTestQuestions = async (req: Request, res: Response): Promise<void> => {
+
+    const {testId} = req.params;
+
+    const test = await Test.findById(testId);
+
+     if (!test) {
+        res.status(404).json({
+          success: false,
+          message: "Test not found",
+        })
+        return
+      }
+
+      const questions = await Question.find({_id:{'$in':test.questions}})
+      .populate('category')
+
+      res.json(questions)
+
+  }
+
 }
 
 export default new TestController()
