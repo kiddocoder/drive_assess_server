@@ -62,7 +62,7 @@ class Server {
  
     this.app.use(
        cors({
-          origin: [String(process.env.FRONTEND_URL)],
+          origin: [String(process.env.FRONTEND_URL),String(process.env.LANDING_URL)],
           credentials: true,
           methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
          }),

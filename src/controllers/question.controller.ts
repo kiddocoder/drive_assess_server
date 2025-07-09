@@ -74,6 +74,15 @@ export class QuestionController {
     }
   }
 
+   public getRandomQuestions = async (req: Request, res: Response): Promise<void> => {
+   
+     const questions = await Question.find()
+     .populate('category');
+
+      res.json(questions)
+
+   }
+
   public getQuestionById = async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.params

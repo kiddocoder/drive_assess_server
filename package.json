@@ -1,5 +1,5 @@
 {
-  "$schema":"https://json.schemastore.org/package",
+  "$schema": "https://json.schemastore.org/package",
   "name": "drive_assess_server",
   "version": "1.0.0",
   "description": "",
@@ -30,6 +30,7 @@
     "morgan": "^1.10.0",
     "nodemailer": "^7.0.3",
     "socket.io": "^4.8.1",
+    "stripe": "^18.3.0",
     "winston": "^3.17.0"
   },
   "devDependencies": {

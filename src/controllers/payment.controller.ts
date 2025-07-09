@@ -17,6 +17,9 @@ import { Logger } from "../utils/Logger"
 import { Types } from "mongoose"
 import { Subscription } from "../models/users/Subscription"
 import { Metadata } from "../models/payments/Metadata"
+import Stripe from "stripe";
+
+const stripe = new Stripe(String(process.env.STRIPE_SECRET_KEY));
 
 export class PaymentController {
   public getAllPayments = async (req: Request, res: Response): Promise<void> => {
@@ -374,6 +377,24 @@ export class PaymentController {
         return 0
     }
   }
+
+
+  public createPaymentIntent = async (req: Request, res: Response) => {
+  try {
+    const { amount, currency, paymentMethodType } = req.body;
+    
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency,
+      payment_method_types: [paymentMethodType],
+    });
+
+    res.json({ clientSecret: paymentIntent.client_secret });
+  } catch (error:any) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 }
 
 export default new PaymentController()

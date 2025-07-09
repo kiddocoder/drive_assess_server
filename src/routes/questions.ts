@@ -34,14 +34,12 @@ const updateQuestionValidation = [
   body("points").optional().isInt({ min: 1, max: 10 }).withMessage("Points must be between 1 and 10"),
 ]
 
-// All routes require authentication
-router.use(authenticateToken)
-
 // Routes
 router.get("/", questionController.getAllQuestions)
+router.get("/randomized/questions", questionController.getRandomQuestions)
 router.get("/stats", requireRole(["admin", "instructor"]), questionController.getQuestionStats)
 router.get("/:id", questionController.getQuestionById)
-router.post("/", requireRole(["admin", "instructor"]), createQuestionValidation, questionController.createQuestion)
+router.post("/",authenticateToken,createQuestionValidation, questionController.createQuestion).use(requireRole(["admin", "instructor"]))
 router.post("/bulk", requireRole(["admin", "instructor"]), questionController.bulkCreateQuestions)
 router.put("/:id", requireRole(["admin", "instructor"]), updateQuestionValidation, questionController.updateQuestion)
 router.delete("/:id", requireRole(["admin", "instructor"]), questionController.deleteQuestion)

@@ -11,7 +11,7 @@
 import { Router } from "express"
 import { body } from "express-validator"
 import { CategoryController } from "../controllers/category.controller"
-import { authenticateToken, requireRole } from "../middleware/auth.middleware"
+import { authenticateToken,requireRole } from "../middleware/auth.middleware"
 
 const router = Router()
 const categoryController = new CategoryController()
@@ -43,9 +43,6 @@ const updateCategoryValidation = [
     .matches(/^#[0-9A-F]{6}$/i)
     .withMessage("Color must be a valid hex color"),
 ]
-
-// All routes require authentication
-router.use(authenticateToken)
 
 // Routes
 router.get("/", categoryController.getAllCategories)
