@@ -15,7 +15,7 @@ import { IPayment, Payment } from "../models/payments/Payment"
 import { User } from "../models/users/User"
 import { Logger } from "../utils/Logger"
 import { Types } from "mongoose"
-import { Subscription } from "../models/users/Subscription"
+import { Subscription, subscriptionSchema } from "../models/users/Subscription"
 import { Metadata } from "../models/payments/Metadata"
 import Stripe from "stripe";
 
@@ -93,6 +93,8 @@ export class PaymentController {
 
   public createPayment = async (req: Request, res: Response): Promise<void> => {
     try {
+       const userId = (req as any).user.userId;
+       
       const errors = validationResult(req)
       if (!errors.isEmpty()) {
         res.status(400).json({
@@ -111,7 +113,7 @@ export class PaymentController {
 
       const metadata = await new Metadata(metadatas).save()
 
-      const user = await User.findById(req.body.user.userId)
+      const user = await User.findById(userId)
 
       if (!user) {
         res.status(404).json({
@@ -123,7 +125,7 @@ export class PaymentController {
 
       const paymentData = {
         ...req.body,
-        user: req.body.user.userId,
+        user: user._id,
         metadata: metadata._id
       }
 
@@ -139,7 +141,17 @@ export class PaymentController {
   
       // Update user subscription if payment is for subscription
       if (payment.type === "subscription" && payment.status === "completed") {
-        await this.updateUserSubscription(req.body.user.userId, payment,payment.subscription?._id,)
+        // create subscription
+        const subscription =  await Subscription.create({
+          user: user._id,
+          status:'active',
+          plan: req.body.plan,
+          startDate: new Date(),
+        });
+        
+        payment.subscription = subscription?._id as Types.ObjectId;
+
+        await this.updateUserSubscription(user._id as Types.ObjectId, payment,payment.subscription?._id,)
       }
 
       await payment.populate("user", "name email")
@@ -381,12 +393,17 @@ export class PaymentController {
 
   public createPaymentIntent = async (req: Request, res: Response) => {
   try {
-    const { amount, currency, paymentMethodType } = req.body;
+    const { amount, currency } = req.body;
     
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency,
-      payment_method_types: [paymentMethodType],
+      automatic_payment_methods: {
+        enabled: true,
+      },
+      metadata: {
+        integration_check: "accept_a_payment",
+      },
     });
 
     res.json({ clientSecret: paymentIntent.client_secret });
@@ -394,6 +411,43 @@ export class PaymentController {
     res.status(500).json({ error: error.message });
   }
 };
+
+ public getPayouts = async (req: Request, res: Response) => {
+ try {
+    const payouts = await stripe.payouts.list();
+
+    res.status(200).json({ payouts: payouts.data });
+  } catch (error:any) {
+    res.status(400).json({ error: error.message });
+  }
+
+ }
+
+ public withdraw = async (req: Request, res: Response) => {
+  const { amount } = req.body; // in cents (e.g., $10 = 1000 cents)
+
+  try {
+    const payout = await stripe.payouts.create({
+      amount: amount * 100, // Convert dollars to cents
+      currency: "usd",
+      method: "standard", // or "instant" (for faster, but higher fee)
+    });
+
+    res.status(200).json({ success: true, payout });
+  } catch (error:any) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+
+ }
+
+  public getStripeBalance = async () => {
+  try {
+    const balance = await stripe.balance.retrieve();
+    return balance as any;
+  } catch (error) {
+    console.error("Error fetching balance:", error);
+  }
+ }
 
 }
 

@@ -2,6 +2,8 @@
 import mongoose, { type Document, Schema } from "mongoose"
 
 export interface ISubscription extends Document {
+  user: mongoose.Types.ObjectId
+  // Subscription status can be pending, active, draft, completed, failed, refunded, or cancelled
   status: "pending" | "active" | "draft" | "completed" | "failed" | "refunded" | "cancelled"
   plan: "free" | "3-day" | "4-day" | "premium" | "single-test"
   startDate: Date
@@ -13,6 +15,26 @@ export interface ISubscription extends Document {
 }
 
 export const subscriptionSchema = new Schema<ISubscription>({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: false,
+    default: null,
+  },
+  autoRenew: {
+    type: Boolean,
+    default: true,
+  },
+  cancelledAt: {
+    type: Date,
+    default: null,
+  },
+  cancelReason: {
+    type: String,
+    trim: true,
+    default: null,
+  },
+  // Subscription status can be pending, active, draft, completed, failed, refunded, or cancelled
   status: {
     type: String,
     enum: ["pending", "active", "draft", "completed", "failed", "refunded", "cancelled"],

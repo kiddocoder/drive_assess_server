@@ -24,15 +24,16 @@ const createPaymentValidation = [
   body("paymentMethod").isIn(["stripe", "paypal", "apple_pay", "google_pay"]).withMessage("Invalid payment method"),
 ]
 
-// All routes require authentication
-router.use(authenticateToken)
-
 // Routes
 router.get("/", requireRole(["admin"]), paymentController.getAllPayments)
+router.get("/payouts",paymentController.getPayouts);
+router.get("/stripe/available/balance",paymentController.getStripeBalance)
+router.get("/withdraw",paymentController.withdraw);
 router.get("/stats", requireRole(["admin"]), paymentController.getPaymentStats)
 router.get("/:id", paymentController.getPaymentById)
-router.post("/", createPaymentValidation, paymentController.createPayment)
+router.post("/", createPaymentValidation, authenticateToken, paymentController.createPayment)
+router.post("/create-intent", paymentController.createPaymentIntent)
 router.patch("/:id/status", requireRole(["admin"]), paymentController.updatePaymentStatus)
 router.post("/:id/refund", requireRole(["admin"]), paymentController.processRefund)
 
-export default router
+export default router;

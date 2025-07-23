@@ -21,6 +21,7 @@ import { validationResult } from "express-validator"
 import { User } from "../models/users/User"
 import { EmailService } from "../services/EmailService"
 import { Logger } from "../utils/Logger"
+import { Role } from "../models/users/Role"
 
 export class AuthController {
   private emailService: EmailService
@@ -42,7 +43,10 @@ export class AuthController {
         return;
       }
 
-      const { name, email, password, role = "student", phone, location } = req.body
+      const { name, email, password, phone, location } = req.body
+
+      const role = await Role.findOne({name:'student'});
+
 
       // Check if user already exists
       const existingUser = await User.findOne({ email })
@@ -54,12 +58,22 @@ export class AuthController {
         return
       }
 
+      // Check if phone already exists
+      const existingPhone = await User.findOne({ phone })
+      if (existingPhone) {
+        res.status(409).json({
+          success: false,
+          message: "This phone number is already used !",
+        })
+        return
+      }
+
       // Create new user
       const user = new User({
         name,
         email,
         password,
-        role,
+        role:role?._id,
         phone,
         location,
       })
@@ -72,7 +86,7 @@ export class AuthController {
       // Send verification email
       await this.emailService.sendVerificationEmail(user.email, user.name, token)
 
-      Logger.info(`New user registered: ${email} (${role})`)
+      Logger.info(`New user registered: ${email} (${role?.name})`)
 
       res.status(201).json({
         success: true,
@@ -98,13 +112,17 @@ export class AuthController {
   }
 
   public login = async (req: Request, res: Response): Promise<void> => {
-     console.log(req.body)
     try {
       const { identifier, password } = req.body
-      const email = identifier;
+      const emailOrPhone = identifier; // either email or phone number 
 
-      // Find user and include password for comparison
-      const user = await User.findOne({ email }).select("+password")
+      // Find user by either email or phone number and include password for comparison
+      const user = await User.findOne({
+        $or: [
+          { email: emailOrPhone },
+          { phone: emailOrPhone }
+        ]
+      }).select("+password")
       .populate("subscription")
       .populate("role");
 
@@ -157,7 +175,7 @@ export class AuthController {
       // Generate JWT token
       const token = user.generateToken()
 
-      Logger.info(`User logged in: ${email} (${user.role})`)
+      Logger.info(`User logged in: ${emailOrPhone} (${user.role})`)
 
 
       res.cookie("accessToken", token, {
@@ -186,6 +204,39 @@ export class AuthController {
       res.status(500).json({
         success: false,
         message: "Internal server error during login",
+      })
+    }
+  }
+
+  public logout = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const userId = (req as any).user.userId
+
+      const user = await User.findById(userId)
+      if (!user) {
+        res.status(404).json({
+          success: false,
+          message: "User not found",
+        })
+        return
+      }
+
+      // Clear the access token cookie
+      res.clearCookie("accessToken", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: "strict",
+      })
+      Logger.info("User logged out successfully")
+      res.status(200).json({
+        success: true,
+        message: "Logout successful",
+      })
+    } catch (error: any) {
+      Logger.error("Logout error:", error)
+      res.status(500).json({
+        success: false,
+        message: "Internal server error during logout",
       })
     }
   }

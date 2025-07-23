@@ -32,13 +32,13 @@ export class EmailService {
       const verificationUrl = `${process.env.FRONTEND_URL}/verify-email/${token}`
 
       const mailOptions = {
-        from: `"DriveReady" <${process.env.SMTP_USER}>`,
+        from: `"DriveAcess" <${process.env.SMTP_USER}>`,
         to: email,
-        subject: "🚗 Welcome to DriveReady - Verify Your Email",
+        subject: "🚗 Welcome to DriveAcess - Verify Your Email",
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f8f9fa;">
             <div style="background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); padding: 30px; text-align: center;">
-              <h1 style="color: white; margin: 0; font-size: 28px;">🚗 DriveReady</h1>
+              <h1 style="color: white; margin: 0; font-size: 28px;">🚗 DriveAcess</h1>
               <p style="color: #fecaca; margin: 10px 0 0 0;">Your Canadian Driving Test Platform</p>
             </div>
             
@@ -46,7 +46,7 @@ export class EmailService {
               <h2 style="color: #1f2937; margin-bottom: 20px;">Welcome, ${name}! 🎉</h2>
               
               <p style="color: #4b5563; line-height: 1.6; margin-bottom: 25px;">
-                Thank you for joining DriveReady! We're excited to help you prepare for your Canadian driving test.
+                Thank you for joining DriveAcess! We're excited to help you prepare for your Canadian driving test.
               </p>
               
               <p style="color: #4b5563; line-height: 1.6; margin-bottom: 30px;">
@@ -74,7 +74,7 @@ export class EmailService {
             
             <div style="background-color: #f3f4f6; padding: 20px 30px; text-align: center;">
               <p style="color: #6b7280; font-size: 12px; margin: 0;">
-                © 2024 DriveReady. All rights reserved.<br>
+                © ${new Date().getFullYear()} DriveAcess. All rights reserved.<br>
                 Helping Canadians pass their driving tests with confidence! 🇨🇦
               </p>
             </div>
@@ -95,13 +95,13 @@ export class EmailService {
       const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${token}`
 
       const mailOptions = {
-        from: `"DriveReady" <${process.env.SMTP_USER}>`,
+        from: `"DriveAcess" <${process.env.SMTP_USER}>`,
         to: email,
-        subject: "🔐 Reset Your DriveReady Password",
+        subject: "🔐 Reset Your DriveAcess Password",
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f8f9fa;">
             <div style="background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); padding: 30px; text-align: center;">
-              <h1 style="color: white; margin: 0; font-size: 28px;">🚗 DriveReady</h1>
+              <h1 style="color: white; margin: 0; font-size: 28px;">🚗 DriveAcess</h1>
               <p style="color: #fecaca; margin: 10px 0 0 0;">Password Reset Request</p>
             </div>
             
@@ -109,7 +109,7 @@ export class EmailService {
               <h2 style="color: #1f2937; margin-bottom: 20px;">Hi ${name},</h2>
               
               <p style="color: #4b5563; line-height: 1.6; margin-bottom: 25px;">
-                We received a request to reset your password for your DriveReady account.
+                We received a request to reset your password for your DriveAcess account.
               </p>
               
               <p style="color: #4b5563; line-height: 1.6; margin-bottom: 30px;">
@@ -145,7 +145,7 @@ export class EmailService {
             
             <div style="background-color: #f3f4f6; padding: 20px 30px; text-align: center;">
               <p style="color: #6b7280; font-size: 12px; margin: 0;">
-                © 2024 DriveReady. All rights reserved.<br>
+                © ${ new Date().getFullYear()} DriveAcess. All rights reserved.<br>
                 Stay safe on Canadian roads! 🇨🇦
               </p>
             </div>
@@ -170,13 +170,13 @@ export class EmailService {
   ): Promise<void> {
     try {
       const mailOptions = {
-        from: `"DriveReady" <${process.env.SMTP_USER}>`,
+        from: `"DriveAcess" <${process.env.SMTP_USER}>`,
         to: email,
         subject: `${passed ? "🎉" : "📚"} Test ${passed ? "Passed" : "Completed"}: ${testTitle}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f8f9fa;">
             <div style="background: linear-gradient(135deg, ${passed ? "#16a34a" : "#dc2626"} 0%, ${passed ? "#15803d" : "#b91c1c"} 100%); padding: 30px; text-align: center;">
-              <h1 style="color: white; margin: 0; font-size: 28px;">🚗 DriveReady</h1>
+              <h1 style="color: white; margin: 0; font-size: 28px;">🚗 DriveAcess</h1>
               <p style="color: ${passed ? "#bbf7d0" : "#fecaca"}; margin: 10px 0 0 0;">Test Results</p>
             </div>
             
@@ -229,7 +229,7 @@ export class EmailService {
             
             <div style="background-color: #f3f4f6; padding: 20px 30px; text-align: center;">
               <p style="color: #6b7280; font-size: 12px; margin: 0;">
-                © 2024 DriveReady. All rights reserved.<br>
+                © ${new Date().getFullYear()} DriveAcess. All rights reserved.<br>
                 Your success is our priority! 🇨🇦
               </p>
             </div>

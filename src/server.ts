@@ -62,7 +62,7 @@ class Server {
  
     this.app.use(
        cors({
-          origin: [String(process.env.FRONTEND_URL),String(process.env.LANDING_URL)],
+          origin: [String(process.env.FRONTEND_URL),String(process.env.LANDING_URL),"https://driveassess.netlify.app"],
           credentials: true,
           methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
          }),
@@ -147,7 +147,7 @@ class Server {
         Logger.info(`🚀 Server running on port ${this.port}`)
         Logger.info(`🌍 Environment: ${process.env.NODE_ENV || "development"}`)
         Logger.info(`📡 Socket.IO enabled on same port`)
-        Logger.info(`🇨🇦 DriveReady Backend - Ready to serve!`)
+        Logger.info(`🇨🇦 DriveAcess Backend - Ready to serve!`)
       })
 
       // Graceful shutdown handling

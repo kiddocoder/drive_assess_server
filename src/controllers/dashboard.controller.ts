@@ -20,6 +20,7 @@ import { User } from "../models/users/User"
 import { Test } from "../models/Test"
 import { Logger } from "../utils/Logger"
 import type { SocketService } from "../services/SocketService"
+import { Role } from "../models/users/Role"
 
 export class DashboardController {
   private socketService: SocketService
@@ -33,14 +34,16 @@ export class DashboardController {
       const userRole = (req as any).user.role
       const userId = (req as any).user.userId
 
+      const roles = await Role.find()
+      
       // Get basic statistics
       const [totalUsers, totalTests, totalStudents, totalInstructors, activeTests, recentUsers] = await Promise.all([
         User.countDocuments(),
         Test.countDocuments(),
-        User.countDocuments({ role: "student" }),
-        User.countDocuments({ role: "instructor" }),
+        User.countDocuments({ role: roles.find((role) => role.name === "student")?._id }),
+        User.countDocuments({ role: roles.find((role) => role.name === "instructor")?._id }),
         Test.countDocuments({ isActive: true, isPublished: true }),
-        User.find({ role: "student" }).sort({ createdAt: -1 }).limit(10).select("name email createdAt lastLogin"),
+        User.find({ role: { $ne: roles.find((role) => role.name === "student")?._id } }).sort({ createdAt: -1 }).limit(10).select("name email createdAt lastLogin"),
       ])
 
       // Calculate growth percentages (mock data for now)

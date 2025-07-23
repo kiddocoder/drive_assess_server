@@ -15,17 +15,13 @@ export interface IPayment extends Document {
   type: "subscription" | "test_purchase" | "certificate" | "refund"
   amount: number
   currency: string
-  status: "pending" | "completed" | "failed" | "refunded" | "cancelled"
+  status: "pending" | "completed" | "failed" | "refunded" | "cancelled"|"succeeded"
   paymentMethod: "stripe" | "paypal" | "apple_pay" | "google_pay"
+  stripePaymentMethod?:String,
   transactionId?: string
   stripePaymentIntentId?: string
   subscription?: mongoose.Types.ObjectId | null
-  metadata: {
-    ipAddress?: string
-    userAgent?: string
-    couponCode?: string
-    discount?: number
-  }
+  metadata?: mongoose.Types.ObjectId | null
   createdAt: Date
   updatedAt: Date
 }
@@ -50,18 +46,23 @@ export const paymentSchema = new Schema<IPayment>(
     currency: {
       type: String,
       required: [true, "Currency is required"],
-      default: "CAD",
+      default: "USD",
       uppercase: true,
     },
     status: {
       type: String,
-      enum: ["pending", "completed", "failed", "refunded", "cancelled"],
+      enum: ["pending", "completed", "succeeded","failed", "refunded", "cancelled","succeeded"],
       default: "pending",
     },
     paymentMethod: {
       type: String,
       enum: ["stripe", "paypal", "apple_pay", "google_pay"],
       required: [true, "Payment method is required"],
+    },
+    stripePaymentMethod:{
+      type:String,
+      default:"",
+      trim:true
     },
     transactionId: {
       type: String,

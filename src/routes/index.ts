@@ -28,6 +28,7 @@ import uploadRoutes from "./upload"
 import categoryRoutes from "./categories"
 import questionRoutes from"./questions"
 import roleRoutes from "./roles"
+import jwtRoutes from "./jwt";
 
 const router = Router()
 
@@ -51,5 +52,6 @@ router.use("/tests", testRoutes)
 router.use("/payments", paymentRoutes)
 router.use("/upload", uploadRoutes)
 router.use("/roles",roleRoutes)
+router.use("/jwt",jwtRoutes)
 
 export default router
