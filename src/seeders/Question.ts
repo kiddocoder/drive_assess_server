@@ -29,10 +29,11 @@ const seedQuestions =  async  () =>{
   ].map(async (question) => {
 
     const existingQuestion = await Question.findOne({question:question.question})
-    if(!existingQuestion){
-       const newQuestion =  new Question(question)
-       newQuestion.category = await Category.findOne({name:"Road Signs & Signals"}).
-    }
+    // if(!existingQuestion){
+    //    const newQuestion =  new Question(question)
+    //    newQuestion.category = await Category.findOne({name:"Road Signs & Signals"}).
+    // }
+  
 
   })
 }

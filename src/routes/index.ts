@@ -29,18 +29,10 @@ import categoryRoutes from "./categories"
 import questionRoutes from"./questions"
 import roleRoutes from "./roles"
 import jwtRoutes from "./jwt";
+import assetsRoutes from "./assets"
 
 const router = Router()
 
-// Health check for API
-router.get("/health", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "DriveAccess API is running",
-    timestamp: new Date().toISOString(),
-    version: "1.0.0",
-  })
-})
 
 // Route modules
 router.use("/auth", authRoutes)
@@ -53,5 +45,8 @@ router.use("/payments", paymentRoutes)
 router.use("/upload", uploadRoutes)
 router.use("/roles",roleRoutes)
 router.use("/jwt",jwtRoutes)
+router.use("/assets/",assetsRoutes)
+
+
 
 export default router

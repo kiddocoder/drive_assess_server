@@ -106,7 +106,7 @@ class Server {
       res.status(200).json({
         status: "OK",
         timestamp: new Date().toISOString(),
-        uptime: process.uptime(),
+        uptime: Math.floor(process.uptime()),
         environment: process.env.NODE_ENV || "development",
       })
     })
