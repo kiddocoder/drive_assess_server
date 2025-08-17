@@ -53,6 +53,7 @@ const resetPasswordValidation = [
 // Routes
 router.post("/register", registerValidation, authController.register)
 router.post("/login", loginValidation, authController.login)
+router.post("/logout", authenticateToken,authController.logout)
 router.get("/verify-email/:token", authController.verifyEmail)
 router.post("/forgot-password", forgotPasswordValidation, authController.forgotPassword)
 router.post("/reset-password/:token", resetPasswordValidation, authController.resetPassword)

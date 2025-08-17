@@ -140,7 +140,7 @@ export class PaymentController {
       }
   
       // Update user subscription if payment is for subscription
-      if (payment.type === "subscription" && payment.status === "completed") {
+      if (payment.type === "subscription" && ["pending","completed"].includes(payment.status)) {
         // create subscription
         const subscription =  await Subscription.create({
           user: user._id,
@@ -150,6 +150,9 @@ export class PaymentController {
         });
         
         payment.subscription = subscription?._id as Types.ObjectId;
+        payment.status = "completed";
+
+        await payment.save();
 
         await this.updateUserSubscription(user._id as Types.ObjectId, payment,payment.subscription?._id,)
       }
